@@ -30,26 +30,31 @@ function Createlogo() {
             onHandleInputChange={(value) =>
               onHandleInputChange("logoTitle", value)
             }
+            formData={formData}
           />
         ) : step == 2 ? (
           <LogoDesc
             onHandleInputChange={(value) => onHandleInputChange("desc", value)}
+            formData={formData}
           />
         ) : step == 3 ? (
           <LogoColorPalette
             onHandleInputChange={(value) =>
               onHandleInputChange("palette", value)
             }
+            formData={formData}
           />
         ) : step == 4 ? (
           <LogoDesigns
             onHandleInputChange={(value) =>
               onHandleInputChange("design", value)
             }
+            formData={formData}
           />
         ) : step == 5 ? (
           <LogoIdea
             onHandleInputChange={(value) => onHandleInputChange("idea", value)}
+            formData={formData}
           />
         ) : null}
 

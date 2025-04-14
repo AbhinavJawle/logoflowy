@@ -4,7 +4,7 @@ import HeadingDescription from "./HeadingDescription";
 import { Input } from "@/components/ui/input";
 import { useSearchParams } from "next/navigation";
 
-function LogoTitle({ onHandleInputChange }) {
+function LogoTitle({ onHandleInputChange, formData }) {
   const searchParams = useSearchParams();
   const [logoTitle, useLogoTitle] = useState(
     searchParams?.get("logoTitle") ?? ""
@@ -20,8 +20,8 @@ function LogoTitle({ onHandleInputChange }) {
       <Input
         placeholder="Enter your brand name"
         className="w-full rounded-md focus-visible:ring-offset-0 focus-visible:ring-1"
-        defaultValue={logoTitle}
-        onChange={(e) => onHandleInputChange(e?.target?.value)}
+        value={formData.logoTitle}
+        onChange={(e) => onHandleInputChange(e.target.value)}
       />
     </div>
   );

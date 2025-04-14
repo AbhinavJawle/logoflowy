@@ -7,10 +7,11 @@ interface LogoColorPaletteProps {
   onHandleInputChange: (value: string) => void;
 }
 
-function LogoColorPalette({ onHandleInputChange }: LogoColorPaletteProps) {
-  const [selectedOption, setSelectedOption] = useState<string | undefined>(
-    undefined
-  );
+function LogoColorPalette({
+  onHandleInputChange,
+  formData,
+}: LogoColorPaletteProps) {
+  const [selectedOption, setSelectedOption] = useState(formData?.palette);
 
   return (
     <div className="max-w-2xl mx-auto mb-4">

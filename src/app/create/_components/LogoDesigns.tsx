@@ -8,10 +8,8 @@ interface LogoDesignsProps {
   onHandleInputChange: (value: string) => void;
 }
 
-function LogoDesigns({ onHandleInputChange }: LogoDesignsProps) {
-  const [selectedDesign, setSelectedDesign] = useState<string | undefined>(
-    undefined
-  );
+function LogoDesigns({ onHandleInputChange, formData }: LogoDesignsProps) {
+  const [selectedDesign, setSelectedDesign] = useState(formData?.design?.title);
 
   return (
     <div className="max-w-2xl mx-auto mb-4">
