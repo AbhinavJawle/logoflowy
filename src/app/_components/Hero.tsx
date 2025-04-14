@@ -15,7 +15,7 @@ function Hero() {
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900">
             {Lookup.HeroHeading}
           </h1>
-          <h2 className="text-xl md:text-2xl font-medium text-primary">
+          <h2 className="text-xl md:text-2xl font-medium text-gray-800">
             {Lookup.HeroSubheading}
           </h2>
           <p className="text-sm md:text-base text-gray-600 max-w-2xl mx-auto leading-relaxed">

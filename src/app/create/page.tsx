@@ -1,23 +1,74 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import LogoTitle from "./_components/LogoTitle";
 import { Button } from "@/components/ui/button";
 import { StepForward, CircleChevronLeft } from "lucide-react";
+import LogoDesc from "./_components/LogoDesc";
+import LogoColorPalette from "./_components/LogoColorPalette";
+import LogoDesigns from "./_components/LogoDesigns";
+import LogoIdea from "./_components/LogoIdea";
 
 function Createlogo() {
+  const [step, setStep] = useState(1);
+  const [formData, setFormData] = useState();
+
+  const onHandleInputChange = (field, value) => {
+    setFormData((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+
+    console.log(formData);
+  };
+
   return (
     <div className="container mx-auto px-4 md:px-6 py-8">
-      <div className="mt-8 md:mt-16 lg:mt-28 p-6 md:p-10 border rounded-xl shadow-sm bg-white max-w-5xl mx-auto">
-        <LogoTitle />
+      <div className="mt-4 md:mt-8 lg:mt-12 p-6 md:p-8 border rounded-lg shadow-sm bg-white max-w-3xl mx-auto">
+        {/* //Entire form and step management logi is here: */}
+        {step == 1 ? (
+          <LogoTitle
+            onHandleInputChange={(value) =>
+              onHandleInputChange("logoTitle", value)
+            }
+          />
+        ) : step == 2 ? (
+          <LogoDesc
+            onHandleInputChange={(value) => onHandleInputChange("desc", value)}
+          />
+        ) : step == 3 ? (
+          <LogoColorPalette
+            onHandleInputChange={(value) =>
+              onHandleInputChange("palette", value)
+            }
+          />
+        ) : step == 4 ? (
+          <LogoDesigns
+            onHandleInputChange={(value) =>
+              onHandleInputChange("design", value)
+            }
+          />
+        ) : step == 5 ? (
+          <LogoIdea
+            onHandleInputChange={(value) => onHandleInputChange("idea", value)}
+          />
+        ) : null}
 
-        <div className="flex flex-col sm:flex-row justify-between mt-12 gap-4">
+        <div className="flex flex-col sm:flex-row gap-4 mt-8 max-w-2xl mx-auto">
+          {step != 1 && (
+            <Button
+              onClick={() => setStep(step - 1)}
+              variant="outline"
+              className="cursor-pointer flex items-center gap-2"
+            >
+              <CircleChevronLeft className="h-5 w-5" />
+              <span>Previous</span>
+            </Button>
+          )}
+          {/* <div className="flex-grow"></div> */}
           <Button
-            variant="outline"
             className="cursor-pointer flex items-center gap-2"
+            onClick={() => setStep(step + 1)}
           >
-            <CircleChevronLeft className="h-5 w-5" />
-            <span>Previous</span>
-          </Button>
-          <Button className="cursor-pointer flex items-center gap-2">
             <span>Next</span>
             <StepForward className="h-5 w-5" />
           </Button>
