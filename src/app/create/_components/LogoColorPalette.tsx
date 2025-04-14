@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import HeadingDescription from "./HeadingDescription";
 import { Input } from "@/components/ui/input";
 import Colors from "@/app/_data/Colors";
@@ -8,6 +8,10 @@ interface LogoColorPaletteProps {
 }
 
 function LogoColorPalette({ onHandleInputChange }: LogoColorPaletteProps) {
+  const [selectedOption, setSelectedOption] = useState<string | undefined>(
+    undefined
+  );
+
   return (
     <div className="max-w-2xl mx-auto mb-4">
       <HeadingDescription
@@ -26,7 +30,9 @@ function LogoColorPalette({ onHandleInputChange }: LogoColorPaletteProps) {
         {Colors.map((palette, index) => (
           <div
             key={index}
-            className="flex flex-col overflow-hidden rounded-md border shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+            className={`${
+              selectedOption == palette.name && "border-2 border-primary"
+            } flex flex-col overflow-hidden rounded-md border shadow-sm hover:shadow-md transition-shadow cursor-pointer`}
           >
             <div className="flex flex-col h-40">
               {palette.colors.map((color, colorIndex) => (
@@ -34,6 +40,10 @@ function LogoColorPalette({ onHandleInputChange }: LogoColorPaletteProps) {
                   className="flex-1"
                   style={{ backgroundColor: color }}
                   key={colorIndex}
+                  onClick={() => {
+                    setSelectedOption(palette.name);
+                    onHandleInputChange(palette.name);
+                  }}
                 ></div>
               ))}
             </div>
