@@ -4,7 +4,12 @@ import HeadingDescription from "./HeadingDescription";
 import { Input } from "@/components/ui/input";
 import { useSearchParams } from "next/navigation";
 
-function LogoTitle({ onHandleInputChange, formData }) {
+interface LogoTitleProps {
+  onHandleInputChange: (value: string) => void;
+  formData?: any;
+}
+
+function LogoTitle({ onHandleInputChange, formData }: LogoTitleProps) {
   const searchParams = useSearchParams();
   const [logoTitle, useLogoTitle] = useState(
     searchParams?.get("logoTitle") ?? ""

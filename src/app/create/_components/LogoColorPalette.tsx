@@ -5,6 +5,7 @@ import Colors from "@/app/_data/Colors";
 
 interface LogoColorPaletteProps {
   onHandleInputChange: (value: string) => void;
+  formData?: any;
 }
 
 function LogoColorPalette({

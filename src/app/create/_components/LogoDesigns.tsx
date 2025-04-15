@@ -5,7 +5,8 @@ import LogoDesign from "@/app/_data/LogoDesign";
 import Image from "next/image";
 
 interface LogoDesignsProps {
-  onHandleInputChange: (value: string) => void;
+  onHandleInputChange: (value: any) => void;
+  formData?: any;
 }
 
 function LogoDesigns({ onHandleInputChange, formData }: LogoDesignsProps) {

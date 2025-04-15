@@ -2,7 +2,12 @@ import React from "react";
 import HeadingDescription from "./HeadingDescription";
 import { Input } from "@/components/ui/input";
 
-function LogoDesc({ onHandleInputChange, formData }) {
+interface LogoDescProps {
+  onHandleInputChange: (value: string) => void;
+  formData?: any;
+}
+
+function LogoDesc({ onHandleInputChange, formData }: LogoDescProps) {
   return (
     <div className="max-w-2xl mx-auto mb-4">
       <HeadingDescription
