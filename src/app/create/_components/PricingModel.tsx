@@ -1,10 +1,17 @@
-import React, { useState } from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import HeadingDescription from "./HeadingDescription";
 import Lookup from "@/app/_data/Lookup";
 import Image from "next/image";
 
-function PricingModel() {
+function PricingModel({ onHandleInputChange, formData }) {
   const [selectedPlan, setSelectedPlan] = useState("");
+
+  useEffect(() => {
+    if (formData?.logoTitle && typeof window !== "undefined") {
+      localStorage.setItem("formData", JSON.stringify(formData));
+    }
+  }, [formData]);
 
   return (
     <div className="max-w-6xl mx-auto mb-4 px-4">
