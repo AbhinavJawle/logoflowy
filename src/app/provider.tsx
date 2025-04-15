@@ -9,7 +9,7 @@ import { UserDetailContext } from "@/app/_context/UserDetailContext";
 
 function Provider({ children }: { children: React.ReactNode }) {
   const { user } = useUser();
-  const { userDetail, setUserDetail } = useState();
+  const [userDetail, setUserDetail] = useState();
   useEffect(() => {
     user && checkUser();
   }, [user]);

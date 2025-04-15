@@ -4,6 +4,7 @@ import HeadingDescription from "./HeadingDescription";
 import Lookup from "@/app/_data/Lookup";
 import Image from "next/image";
 import { SignInButton, useUser } from "@clerk/nextjs";
+import Link from "next/link";
 
 function PricingModel({ onHandleInputChange, formData }) {
   const [selectedPlan, setSelectedPlan] = useState("");
@@ -42,9 +43,11 @@ function PricingModel({ onHandleInputChange, formData }) {
               ))}
             </div>
             {user ? (
-              <button className="mt-auto py-2 px-8 bg-primary text-white rounded-md font-medium cursor-pointer hover:bg-primary/90 transition-colors">
-                {plan.button}
-              </button>
+              <Link href={"/create-logo?type=" + plan.title}>
+                <button className="mt-auto py-2 px-8 bg-primary text-white rounded-md font-medium cursor-pointer hover:bg-primary/90 transition-colors">
+                  {plan.button}
+                </button>
+              </Link>
             ) : (
               <SignInButton
                 mode="modal"
