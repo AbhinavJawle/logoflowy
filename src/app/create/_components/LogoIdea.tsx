@@ -13,13 +13,13 @@ function LogoIdea({ formData }) {
       "{logoType}",
       formData?.design.title
     )
-      .replace("{logoTitle}", formData?.logoTitle)
+      .replace("{logoType}", formData?.design.title)
       .replace("{logoTitle}", formData?.logoTitle)
       .replace("{logoDesc}", formData?.desc)
-      .replace("{logoPrompt}", formData?.design.propmt);
+      .replace("{logoPrompt}", formData?.design.prompt);
 
-    // const result = await axios.post("/ai-design-idea", { prompt: PROMPT });
-    console.log(PROMPT);
+    const result = await axios.post("/api/ai-design-idea", { prompt: PROMPT });
+    console.log(result.data);
   };
   return (
     <div className="max-w-2xl mx-auto mb-4">

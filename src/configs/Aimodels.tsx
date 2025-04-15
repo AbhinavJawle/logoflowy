@@ -1,72 +1,39 @@
-// To run this code you need to install the following dependencies:
-// npm install @google/genai mime
-// npm install -D @types/node
+import { GoogleGenAI } from "@google/genai";
 
-import { GoogleGenerativeAI, Content } from "@google/generative-ai";
+const ai = new GoogleGenAI({ apiKey: "GOOGLE_API_KEY" });
+export const AIDesignIdeaGenerate = ai.chats.create({
+  model: "gemini-2.0-flash-exp-image-generation",
+  config: {
+    temperature: 1.45,
+    responseModalities: ["image", "text", "json"],
+    responseMimeType: "application/json",
+  },
 
-const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
-
-if (!apiKey) {
-  throw new Error("NEXT_PUBLIC_GEMINI_API_KEY is not set");
-}
-
-const genAI = new GoogleGenerativeAI(apiKey);
-
-const modelConfig = {
-  // Controls randomness: Lower values are more deterministic,
-  // higher values are more creative.
-  temperature: 0.9,
-  // Maximum number of output tokens
-  maxOutputTokens: 2048,
-};
-
-const modelName = "gemini-1.5-flash"; // Or another model you prefer
-
-const model = genAI.getGenerativeModel({
-  model: modelName,
-  generationConfig: modelConfig,
-  // safetySettings: Adjust safety settings
-  // See https://ai.google.dev/gemini-api/docs/safety-settings
-});
-
-/**
- * Generates AI content based on the provided prompt.
- * @param prompt The user's input prompt.
- * @returns A promise that resolves with the AI's response text.
- */
-export async function generateAIResponse(prompt: string): Promise<string> {
-  const contents: Content[] = [
+  history: [
     {
       role: "user",
       parts: [
         {
-          text: prompt,
+          text: "Based on Logo of type Minimalists And Elegants Logos Generate a text prompt to create Logo for Logo title/Brand name : Kaffee with decription: A coffee company and refering to prompt: Create a sophisticated and elegant logo design that is inspired by nature and vintage aesthetics. The logo should incorporate elements of symbolism, intricate details, and a touch of mystery. Use a combination of typography, line art, and subtle color palettes to create a timeless and visually striking design. The logo should convey a sense of luxury, tradition, and quality.. Give me 6/7 Suggestion of logo idea s(each idea with maximum 4-5 words), Result in JSON format only ideas field",
         },
       ],
     },
-  ];
-
-  try {
-    const result = await model.generateContent({
-      contents: contents,
-      config: { responseMimeType: "application/json" }, // If you need JSON
-    });
-    const response = result.response;
-    const text = response.text();
-    return text;
-  } catch (error) {
-    console.error("Error generating AI response:", error);
-    throw new Error("Failed to generate AI response");
-  }
-}
-
-// Example usage (can be removed or kept for testing):
-// async function testGeneration() {
-//   try {
-//     const responseText = await generateAIResponse("Write a short story about a magic backpack.");
-//     console.log("AI Response:", responseText);
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
-// testGeneration();
+    {
+      role: "model",
+      parts: [
+        {
+          text: `{
+            "ideas": [
+                "Elegant leaf coffee bean",
+                "Vintage key with coffee steam",
+                "Monogram with botanical detail",
+                "Minimalist mountain coffee cup",
+                "Intricate swirling bean design",
+                "Subtle coffee plant silhouette",
+                "Abstract coffee wave symbol"
+            ]}`,
+        },
+      ],
+    },
+  ],
+});
