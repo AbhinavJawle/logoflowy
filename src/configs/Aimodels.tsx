@@ -1,12 +1,12 @@
 import { GoogleGenAI } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: "GOOGLE_API_KEY" });
+const ai = new GoogleGenAI({ apiKey: process.env.NEXT_PUBLIC_GEMINI_API_KEY });
 export const AIDesignIdeaGenerate = ai.chats.create({
   model: "gemini-2.0-flash-exp-image-generation",
   config: {
     temperature: 1.45,
-    responseModalities: ["image", "text", "json"],
-    responseMimeType: "application/json",
+    responseModalities: ["image", "text"],
+    responseMimeType: "text/plain",
   },
 
   history: [

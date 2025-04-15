@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useState } from "react";
 import HeadingDescription from "./HeadingDescription";
 import axios from "axios";
 import Prompt from "@/app/_data/Prompt";
