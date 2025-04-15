@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Provider from "./provider";
 import "./globals.css";
 
+import { ClerkProvider } from "@clerk/nextjs";
+
 //Server-side file
 
 const geistSans = Geist({
@@ -26,12 +28,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <Provider>{children}</Provider>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <Provider>{children}</Provider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

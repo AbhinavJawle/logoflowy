@@ -1,9 +1,13 @@
+"use client";
+
 import Image from "next/image";
 import React from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { UserButton, useUser } from "@clerk/nextjs";
 
 function Header() {
+  const { user } = useUser();
   return (
     <header className="flex items-center justify-between px-4 md:px-6 py-3 bg-white shadow-sm">
       <div className="flex items-center">
@@ -17,9 +21,17 @@ function Header() {
         />
       </div>
       <nav className="flex items-center space-x-2 md:space-x-4">
-        <Button asChild>
-          <Link href="/get-started">Get Started</Link>
-        </Button>
+        {user ? (
+          <Button variant={"outline"} className="cursor-pointer">
+            Dashboard
+          </Button>
+        ) : (
+          <Button asChild>
+            <Link href="/create">Get Started</Link>
+          </Button>
+        )}
+
+        <UserButton />
       </nav>
     </header>
   );

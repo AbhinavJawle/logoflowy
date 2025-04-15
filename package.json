@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/nextjs": "^6.15.0",
     "@google/genai": "^0.8.0",
     "@google/generative-ai": "^0.24.0",
     "@phosphor-icons/react": "^2.1.7",

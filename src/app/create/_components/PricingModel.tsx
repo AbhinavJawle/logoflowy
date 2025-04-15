@@ -3,10 +3,11 @@ import React, { useEffect, useState } from "react";
 import HeadingDescription from "./HeadingDescription";
 import Lookup from "@/app/_data/Lookup";
 import Image from "next/image";
+import { SignInButton, useUser } from "@clerk/nextjs";
 
 function PricingModel({ onHandleInputChange, formData }) {
   const [selectedPlan, setSelectedPlan] = useState("");
-
+  const { user } = useUser();
   useEffect(() => {
     if (formData?.logoTitle && typeof window !== "undefined") {
       localStorage.setItem("formData", JSON.stringify(formData));
@@ -40,9 +41,20 @@ function PricingModel({ onHandleInputChange, formData }) {
                 </div>
               ))}
             </div>
-            <button className="mt-auto py-2 px-8 bg-primary text-white rounded-md font-medium cursor-pointer hover:bg-primary/90 transition-colors">
-              {plan.button}
-            </button>
+            {user ? (
+              <button className="mt-auto py-2 px-8 bg-primary text-white rounded-md font-medium cursor-pointer hover:bg-primary/90 transition-colors">
+                {plan.button}
+              </button>
+            ) : (
+              <SignInButton
+                mode="modal"
+                forceRedirectUrl={"/create-logo?type=" + plan.title}
+              >
+                <button className="mt-auto py-2 px-8 bg-primary text-white rounded-md font-medium cursor-pointer hover:bg-primary/90 transition-colors">
+                  {plan.button}
+                </button>
+              </SignInButton>
+            )}
           </div>
         ))}
       </div>
