@@ -1,13 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import HeadingDescription from "./HeadingDescription";
 import axios from "axios";
 import Prompt from "@/app/_data/Prompt";
+import { Loader2Icon } from "lucide-react";
 
-function LogoIdea({ formData }) {
+function LogoIdea({ formData, onHandleInputChange }) {
+  const [ideas, setIdeas] = useState();
+  const [isloading, setIsLoading] = useState(false);
+  const [selectedOption, setSelectedOption] = useState(formData?.idea);
+
   useEffect(() => {
     generateAiDesignIdeas();
   }, []);
   const generateAiDesignIdeas = async () => {
+    setIsLoading(true);
     const PROMPT = Prompt.DESIGN_IDEA_PROMPT.replace(
       "{logoType}",
       formData?.design.title
@@ -18,8 +24,11 @@ function LogoIdea({ formData }) {
       .replace("{logoPrompt}", formData?.design.prompt);
 
     const result = await axios.post("/api/ai-design-idea", { prompt: PROMPT });
-    console.log(result.data);
+    !ideas && setIdeas(result.data.ideas);
+    console.log(typeof result.data.ideas);
+    setIsLoading(false);
   };
+
   return (
     <div className="max-w-2xl mx-auto mb-4">
       <HeadingDescription
@@ -28,6 +37,41 @@ function LogoIdea({ formData }) {
           "Choose a design style that aligns with your vision, or skip to receive a random suggestion."
         }
       />
+
+      {isloading && <Loader2Icon className="animate-spin my-10" />}
+
+      <div className="flex flex-wrap justify-center gap-3">
+        {ideas &&
+          ideas.map((item, index) => (
+            <h2
+              key={index}
+              onClick={() => {
+                setSelectedOption(item);
+                onHandleInputChange(item);
+              }}
+              className={`py-1.5 px-3 border rounded-md cursor-pointer text-center w-[230px]
+            hover:border-primary ${selectedOption == item && "border-primary"}`}
+            >
+              {item}
+            </h2>
+          ))}
+
+        {ideas && (
+          <h2
+            onClick={() => {
+              setSelectedOption("Let AI Select the best idea");
+              onHandleInputChange("Let AI Select the best idea");
+            }}
+            className={`py-1.5 px-3 border rounded-md cursor-pointer text-center w-[230px]
+            hover:border-primary ${
+              selectedOption == "Let AI Select the best idea" &&
+              "border-primary"
+            }`}
+          >
+            Let AI Select the best idea
+          </h2>
+        )}
+      </div>
     </div>
   );
 }
