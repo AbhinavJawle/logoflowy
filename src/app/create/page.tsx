@@ -7,6 +7,7 @@ import LogoDesc from "./_components/LogoDesc";
 import LogoColorPalette from "./_components/LogoColorPalette";
 import LogoDesigns from "./_components/LogoDesigns";
 import LogoIdea from "./_components/LogoIdea";
+import PricingModel from "./_components/PricingModel";
 
 interface FormData {
   logoTitle?: string;
@@ -66,6 +67,13 @@ function Createlogo() {
             formData={formData}
             onHandleInputChange={(value: string) =>
               onHandleInputChange("idea", value)
+            }
+          />
+        ) : step === 6 ? (
+          <PricingModel
+            formData={formData}
+            onHandleInputChange={(value: string) =>
+              onHandleInputChange("pricing", value)
             }
           />
         ) : null}
