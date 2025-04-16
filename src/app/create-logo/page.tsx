@@ -40,10 +40,10 @@ function CreateLogo() {
 
     console.log("PROMPT", PROMPT);
 
-    //generate logo Prompt
+    //generate image
     const result = await axios.post("/api/ai-logo-model", { prompt: PROMPT });
     console.log(result?.data);
-    //generate logo Image
+    //display image
   };
 
   return <div>CreateLogo</div>;
