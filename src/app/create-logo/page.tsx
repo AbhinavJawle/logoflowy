@@ -6,10 +6,13 @@ import { useContext } from "react";
 import Prompt from "../_data/Prompt";
 import { AIDesignLogoGenerate } from "@/configs/Aimodels";
 import axios from "axios";
+import Image from "next/image";
 
 function CreateLogo() {
   const { userDetail, setUserDetail } = useContext(UserDetailContext);
   const [formData, setFormData] = useState();
+  const [loading, setLoading] = useState();
+  const [logoImage, setLogoImage] = useState("");
 
   useEffect(() => {
     if (typeof window != undefined && userDetail?.email) {
@@ -28,6 +31,7 @@ function CreateLogo() {
   }, [formData]);
 
   const generateAILogo = async () => {
+    setLoading(true);
     const PROMPT = Prompt.LOGO_PROMPT.replace("{logoTitle}", formData.logoTitle)
       .replace("{logoDesc}", formData?.desc)
       .replace("{logoColor}", formData?.palette)
@@ -41,12 +45,29 @@ function CreateLogo() {
     console.log("PROMPT", PROMPT);
 
     //generate image
-    const result = await axios.post("/api/ai-logo-model", { prompt: PROMPT });
-    console.log(result?.data);
+    const result = await axios.post("/api/ai-logo-model", {
+      prompt: PROMPT,
+      email: userDetail?.email,
+      title: formData?.logoTitle,
+      desc: formData?.desc,
+    });
+    console.log("RESULT DATA: " + result.data.images[0].url);
+
+    setLoading(false);
+    setLogoImage(result.data.images[0].url);
+    // console.log("logoImage" + logoImage);
+
     //display image
   };
 
-  return <div>CreateLogo</div>;
+  return (
+    <div>
+      <h2>{loading && "Loading"}</h2>
+      {!loading && (
+        <Image src={logoImage} alt={"logoImage"} width={200} height={200} />
+      )}
+    </div>
+  );
 }
 
 export default CreateLogo;
