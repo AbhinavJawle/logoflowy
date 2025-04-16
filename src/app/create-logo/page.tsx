@@ -34,7 +34,8 @@ function CreateLogo() {
       .replace("{logoDesign}", formData?.design?.title)
       .replace("{logoPrompt}", formData?.design.prompt)
       .replace("{logoIdea}", formData?.idea)
-      .replace("{logoSimplicity}", formData?.simplicity.prompt);
+      .replace("{logoSimplicity}", formData?.simplicity.prompt)
+      .replace("{logoSep}", formData?.logoSep.prompt);
 
     console.log("PROMPT", PROMPT);
 

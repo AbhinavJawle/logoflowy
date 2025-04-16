@@ -9,6 +9,7 @@ import LogoDesigns from "./_components/LogoDesigns";
 import LogoIdea from "./_components/LogoIdea";
 import PricingModel from "./_components/PricingModel";
 import LogoSimplicity from "./_components/LogoSimplicity";
+import LogoSep from "./_components/LogoSep";
 
 interface FormData {
   logoTitle?: string;
@@ -78,6 +79,13 @@ function Createlogo() {
             }
           />
         ) : step === 7 ? (
+          <LogoSep
+            formData={formData}
+            onHandleInputChange={(value: string) =>
+              onHandleInputChange("logoSep", value)
+            }
+          />
+        ) : step === 8 ? (
           <PricingModel
             formData={formData}
             onHandleInputChange={(value: string) =>
