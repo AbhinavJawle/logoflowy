@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
     const AiPrompt = JSON.parse(AiPromptResult.text).prompt;
 
     const response = await axios.post(
-      "https://router.huggingface.co/hf-inference/models/black-forest-labs/FLUX.1-dev",
+      "https://router.huggingface.co/hf-inference/models/black-forest-labs/FLUX.1-schnell",
       AiPrompt,
       {
         headers: {
