@@ -33,7 +33,8 @@ function CreateLogo() {
       .replace("{logoColor}", formData?.palette)
       .replace("{logoDesign}", formData?.design?.title)
       .replace("{logoPrompt}", formData?.design.prompt)
-      .replace("{logoIdea}", formData?.idea);
+      .replace("{logoIdea}", formData?.idea)
+      .replace("{logoSimplicity}", formData?.simplicity.prompt);
 
     console.log("PROMPT", PROMPT);
 

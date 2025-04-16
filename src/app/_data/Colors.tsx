@@ -1,6 +1,6 @@
 export default [
   {
-    name: "Let Us Select",
+    name: "Let AI Select",
     colors: ["#ff5733", "#33ff57", "#3357ff", "#ff33a8", "#f4ff33"],
   },
   {

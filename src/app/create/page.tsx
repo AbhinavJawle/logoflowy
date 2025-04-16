@@ -8,13 +8,14 @@ import LogoColorPalette from "./_components/LogoColorPalette";
 import LogoDesigns from "./_components/LogoDesigns";
 import LogoIdea from "./_components/LogoIdea";
 import PricingModel from "./_components/PricingModel";
+import LogoSimplicity from "./_components/LogoSimplicity";
 
 interface FormData {
   logoTitle?: string;
   desc?: string;
   palette?: string;
   design?: { title: string; image: string; prompt: string };
-  idea?: string; // Assuming idea is also a string
+  idea?: string;
 }
 
 function Createlogo() {
@@ -27,7 +28,7 @@ function Createlogo() {
       [field]: value,
     }));
 
-    console.log(formData);
+    // console.log(formData);
   };
 
   return (
@@ -70,6 +71,13 @@ function Createlogo() {
             }
           />
         ) : step === 6 ? (
+          <LogoSimplicity
+            formData={formData}
+            onHandleInputChange={(value: string) =>
+              onHandleInputChange("simplicity", value)
+            }
+          />
+        ) : step === 7 ? (
           <PricingModel
             formData={formData}
             onHandleInputChange={(value: string) =>
