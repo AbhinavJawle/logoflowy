@@ -15,42 +15,42 @@ export default [
   },
   {
     //chatGpt
-    title: "Modern Mascot Logos",
+    title: "Modern Mascot Logo",
     image: "/design_3.png",
     prompt:
       "A vibrant logo featuring a friendly, animated character with a playful expression. The character is dressed in a classic uniform, complete with a distinctive accessory that adds personality. In one hand, they hold a signature item that represents the brand, while the other elements of the design—such as small decorative touches or natural accents—enhance the overall look. The background consists of a bold, circular design with subtle accents to highlight the character. Below, the brand name is displayed in bold, stylized lettering, with a slight curve and complementary decorative lines. The overall style is fun, welcoming, and full of character.",
   },
   {
     //Gemini
-    title: "Black And White Line Logos",
+    title: "LineArt Logo",
     image: "/design_4.png",
     prompt:
       "Create a minimalist and modern logo design that is clean, simple, and visually appealing. The logo should be easy to recognize and remember, and it should be versatile enough to be used in a variety of contexts. Use a combination of typography and simple geometric shapes to create a visually striking and memorable design. The logo should be timeless and elegant, and it should convey a sense of professionalism and sophistication.",
   },
   {
-    title: "Minimalists And Elegants Logos",
+    title: "Minimalist Logo",
     image: "/design_5.png",
     prompt:
       "Create a sophisticated and elegant logo design that is inspired by nature and vintage aesthetics. The logo should incorporate elements of symbolism, intricate details, and a touch of mystery. Use a combination of typography, line art, and subtle color palettes to create a timeless and visually striking design. The logo should convey a sense of luxury, tradition, and quality.",
   },
   {
-    title: "Vintage Custom Logos",
+    title: "Vintage Custom Logo",
     image: "/design_6.png",
     prompt:
       "Generate a vintage, hand-drawn logo in a circular format. The logo should feature a central illustration, such as a symbol, icon, or image related to the brands identity. The illustration should be detailed and stylized, with a focus on linework and shading. The logo should also include the brand name, written in a vintage, decorative font. The overall aesthetic should be retro and nostalgic, evoking a sense of tradition and quality.",
   },
   {
-    title: "Modern Sharp Lined Logos",
+    title: "Modern Logo",
     image: "/design_7.png",
     prompt: `Design a creative and artistic logo with a retro-modern vibe that showcases the brand's identity. Use bold outlines, intricate patterns, and vibrant, contrasting colors to make the design pop. Incorporate thematic elements like food, nature, technology, or lifestyle symbols depending on the brand's niche. The typography should be playful yet clear, complementing the overall composition with a dynamic and balanced layout. Ensure the logo feels unique, versatile, and eye-catching`,
   },
   {
-    title: "Custom Luxury Logo Designs",
+    title: "Luxury Logo",
     image: "/design_8.png",
     prompt: `Create a set of luxurious, elegant, and professional logos with a gold metallic finish on a dark background. Include a variety of themes, such as animals, letters, symbols, and nature-inspired designs. Each logo should convey sophistication, premium quality, and modern aesthetics, suitable for any brand or industry.`,
   },
   {
-    title: "Vintage Logo Designs With Text & Icon",
+    title: "Vintage Logo",
     image: "/design_9.png",
     prompt:
       "Design a collection of vintage-inspired logos with a hand-drawn, artistic style. Incorporate a variety of themes, including food, animals, characters, and unique brand elements. Each logo should feature bold typography, intricate details, and a retro aesthetic that is versatile and suitable for diverse brands or businesses.",

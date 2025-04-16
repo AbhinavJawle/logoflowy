@@ -21,7 +21,10 @@ function LogoIdea({ formData, onHandleInputChange }) {
       .replace("{logoType}", formData?.design.title)
       .replace("{logoTitle}", formData?.logoTitle)
       .replace("{logoDesc}", formData?.desc)
-      .replace("{logoPrompt}", formData?.design.prompt);
+      .replace("{logoPrompt}", formData?.design.prompt)
+      .replace("{logoSimplicity}", formData?.simplicity.prompt)
+      .replace("{logoSep}", formData?.logoSep.prompt)
+      .replace("{logoOnly", formData?.logoOnly.prompt);
 
     const result = await axios.post("/api/ai-design-idea", { prompt: PROMPT });
     !ideas && setIdeas(result.data.ideas);

@@ -10,6 +10,7 @@ import LogoIdea from "./_components/LogoIdea";
 import PricingModel from "./_components/PricingModel";
 import LogoSimplicity from "./_components/LogoSimplicity";
 import LogoSep from "./_components/LogoSep";
+import LogoOnly from "./_components/LogoOnly";
 
 interface FormData {
   logoTitle?: string;
@@ -65,27 +66,34 @@ function Createlogo() {
             }
           />
         ) : step === 5 ? (
-          <LogoIdea
-            formData={formData}
-            onHandleInputChange={(value: string) =>
-              onHandleInputChange("idea", value)
-            }
-          />
-        ) : step === 6 ? (
           <LogoSimplicity
             formData={formData}
             onHandleInputChange={(value: string) =>
               onHandleInputChange("simplicity", value)
             }
           />
-        ) : step === 7 ? (
+        ) : step === 6 ? (
           <LogoSep
             formData={formData}
             onHandleInputChange={(value: string) =>
               onHandleInputChange("logoSep", value)
             }
           />
+        ) : step === 7 ? (
+          <LogoOnly
+            formData={formData}
+            onHandleInputChange={(value: string) =>
+              onHandleInputChange("logoOnly", value)
+            }
+          />
         ) : step === 8 ? (
+          <LogoIdea
+            formData={formData}
+            onHandleInputChange={(value: string) =>
+              onHandleInputChange("idea", value)
+            }
+          />
+        ) : step === 9 ? (
           <PricingModel
             formData={formData}
             onHandleInputChange={(value: string) =>
