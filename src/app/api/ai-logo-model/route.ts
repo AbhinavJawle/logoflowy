@@ -59,11 +59,11 @@ import { NextRequest, NextResponse } from "next/server";
 import { AIDesignLogoGenerate } from "@/configs/Aimodels";
 import axios from "axios";
 import { Buffer } from "buffer";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "@/configs/FirebaseConfig";
 
 export async function POST(req: NextRequest) {
-  const { prompt, email, title, desc } = await req.json();
+  const { prompt, email, title, desc, userCredits } = await req.json();
 
   try {
     const AiPromptResult = await AIDesignLogoGenerate.sendMessage({
@@ -85,17 +85,23 @@ export async function POST(req: NextRequest) {
       }
     );
 
-    // console.log("FAL RESPONSE", response);
+    const imageAIUrl = response.data.images[0].url;
 
-    // try {
-    //   await setDoc(doc(db, "users", email, "logos", Date.now().toString()), {
-    //     image: response,
-    //     title: title,
-    //     desc: desc,
-    //   });
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    try {
+      const docRef = doc(db, "users", email);
+
+      await setDoc(doc(db, "users", email, "logos", Date.now().toString()), {
+        image: imageAIUrl,
+        title: title,
+        desc: desc,
+      });
+
+      await updateDoc(docRef, {
+        credits: Number(userCredits) - 1,
+      });
+    } catch (error) {
+      console.log(error);
+    }
     // return NextResponse.json(AiPrompt);
     return NextResponse.json(response.data);
   } catch (error) {
