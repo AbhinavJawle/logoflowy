@@ -18,6 +18,10 @@ export interface FormData {
   palette?: string;
   design?: { title: string; image: string; prompt: string };
   idea?: string;
+  simplicity?: { title: string; prompt: string };
+  logoSep?: { title: string; prompt: string };
+  logoOnly?: { title: string; prompt: string };
+  pricing?: string;
 }
 
 function Createlogo() {

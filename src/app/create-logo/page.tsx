@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import type { FormData } from "../create/page";
 import { UserDetailContext } from "../_context/UserDetailContext";
 import { useContext } from "react";
 import Prompt from "../_data/Prompt";
@@ -14,7 +15,7 @@ import { toast } from "sonner";
 
 function CreateLogo() {
   const { userDetail, setUserDetail } = useContext(UserDetailContext);
-  const [formData, setFormData] = useState();
+  const [formData, setFormData] = useState<FormData>();
   const [loading, setLoading] = useState(false);
   const [logoImage, setLogoImage] = useState("");
 
@@ -41,15 +42,16 @@ function CreateLogo() {
       return;
     }
     setLoading(true);
-    const PROMPT = Prompt.LOGO_PROMPT.replace("{logoTitle}", formData.logoTitle)
-      .replace("{logoDesc}", formData?.desc)
-      .replace("{logoColor}", formData?.palette)
-      .replace("{logoDesign}", formData?.design?.title)
-      .replace("{logoPrompt}", formData?.design.prompt)
-      .replace("{logoIdea}", formData?.idea)
-      .replace("{logoSimplicity}", formData?.simplicity.prompt)
-      .replace("{logoSep}", formData?.logoSep.prompt)
-      .replace("{logoOnly", formData?.logoOnly.prompt);
+    const PROMPT = Prompt.LOGO_PROMPT
+      .replace("{logoTitle}", formData?.logoTitle ?? "")
+      .replace("{logoDesc}", formData?.desc ?? "")
+      .replace("{logoColor}", formData?.palette ?? "")
+      .replace("{logoDesign}", formData?.design?.title ?? "")
+      .replace("{logoPrompt}", formData?.design?.prompt ?? "")
+      .replace("{logoIdea}", formData?.idea ?? "")
+      .replace("{logoSimplicity}", formData?.simplicity?.prompt ?? "")
+      .replace("{logoSep}", formData?.logoSep?.prompt ?? "")
+      .replace("{logoOnly}", formData?.logoOnly?.prompt ?? "");
 
     console.log("PROMPT", PROMPT);
 

@@ -23,14 +23,14 @@ function LogoIdea({ formData, onHandleInputChange }: LogoIdeaProps) {
     setIsLoading(true);
     const PROMPT = Prompt.DESIGN_IDEA_PROMPT.replace(
       "{logoType}",
-      formData?.design.title
+      formData?.design?.title || ""
     )
-      .replace("{logoTitle}", formData?.logoTitle)
-      .replace("{logoDesc}", formData?.desc)
-      .replace("{logoPrompt}", formData?.design.prompt)
-      .replace("{logoSimplicity}", formData?.simplicity.prompt)
-      .replace("{logoSep}", formData?.logoSep.prompt)
-      .replace("{logoOnly", formData?.logoOnly.prompt);
+      .replace("{logoTitle}", formData?.logoTitle || "")
+      .replace("{logoDesc}", formData?.desc || "")
+      .replace("{logoPrompt}", formData?.design?.prompt || "")
+      .replace("{logoSimplicity}", formData?.simplicity?.prompt || "")
+      .replace("{logoSep}", formData?.logoSep?.prompt || "")
+      .replace("{logoOnly", formData?.logoOnly?.prompt || "");
 
     const result = await axios.post("/api/ai-design-idea", { prompt: PROMPT });
     !ideas && setIdeas(result.data.ideas);
