@@ -32,4 +32,15 @@ function LogoTitle({ onHandleInputChange, formData }: LogoTitleProps) {
   );
 }
 
-export default LogoTitle;
+import { Suspense } from "react";
+
+export function LogoTitleComponent(props: LogoTitleProps) {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LogoTitle {...props} />
+    </Suspense>
+  );
+}
+
+export default LogoTitleComponent;
+
