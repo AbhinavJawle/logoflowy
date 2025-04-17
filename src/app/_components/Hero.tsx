@@ -27,16 +27,13 @@ function Hero() {
           <div className="relative w-full sm:flex-1">
             <Input
               placeholder="Enter your brand name"
-              className="w-full rounded-md focus-visible:ring-offset-0 focus-visible:ring-1"
+              className="w-full h-14 text-lg px-6 rounded-md focus-visible:ring-offset-0 focus-visible:ring-1 placeholder:text-lg"
               onChange={(e) => setLogoTitle(e?.target.value)}
             />
           </div>
 
           <Link href={"/create?logoTitle=" + logoTitle}>
-            <Button
-              size="default"
-              className="w-full sm:w-auto rounded-md shadow-sm cursor-pointer"
-            >
+            <Button className="w-full sm:w-auto h-14 text-lg px-8 rounded-md shadow-sm cursor-pointer">
               Create
             </Button>
           </Link>
