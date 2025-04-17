@@ -10,6 +10,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Loader2, LayoutDashboard } from "lucide-react";
+import { toast } from "sonner";
 
 function CreateLogo() {
   const { userDetail, setUserDetail } = useContext(UserDetailContext);
@@ -34,6 +35,11 @@ function CreateLogo() {
   }, [formData]);
 
   const generateAILogo = async () => {
+    if (userDetail?.credits <= 0) {
+      toast("Not Enough Credits");
+      console.log("NO CREDITS");
+      return;
+    }
     setLoading(true);
     const PROMPT = Prompt.LOGO_PROMPT.replace("{logoTitle}", formData.logoTitle)
       .replace("{logoDesc}", formData?.desc)
