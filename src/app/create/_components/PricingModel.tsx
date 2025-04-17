@@ -6,7 +6,13 @@ import Image from "next/image";
 import { SignInButton, useUser } from "@clerk/nextjs";
 import Link from "next/link";
 
-function PricingModel({ onHandleInputChange, formData }) {
+function PricingModel({
+  onHandleInputChange,
+  formData,
+}: {
+  onHandleInputChange: (value: string) => void;
+  formData: any;
+}) {
   const [selectedPlan, setSelectedPlan] = useState("");
   const { user } = useUser();
   useEffect(() => {
