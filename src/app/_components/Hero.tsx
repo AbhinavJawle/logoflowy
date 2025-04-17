@@ -6,10 +6,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 
-function Hero() {
-  const [logoTitle, setLogoTitle] = useState("");
+interface HeroProps {
+  onHandleInputChange: (value: string) => void;
+}
+
+function Hero({ onHandleInputChange }: HeroProps) {
+  const [logoTitle, setLogoTitle] = useState<string>("");
   return (
-    <section className="py-16 md:py-24 lg:py-32">
+    <section className="py-16 md:py-24 lg:py-32 bg-[url('/background.jpg')] bg-cover bg-center bg-no-repeat">
       <div className="container mx-auto text-center space-y-12">
         <div className="space-y-4 max-w-3xl mx-auto">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900">
@@ -27,8 +31,8 @@ function Hero() {
           <div className="relative w-full sm:flex-1">
             <Input
               placeholder="Enter your brand name"
-              className="w-full h-14 text-lg px-6 rounded-md focus-visible:ring-offset-0 focus-visible:ring-1 placeholder:text-lg"
-              onChange={(e) => setLogoTitle(e?.target.value)}
+              className="w-full h-14 text-lg px-6 rounded-md border !border-black !focus:border-black !focus-visible:border-black placeholder:text-lg placeholder:text-black"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLogoTitle(e.target.value)}
             />
           </div>
 

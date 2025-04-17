@@ -24,9 +24,11 @@ function Header() {
       </div>
       <nav className="flex items-center space-x-2 md:space-x-4">
         {user ? (
-          <Button variant={"outline"} className="cursor-pointer">
-            Dashboard
-          </Button>
+          <Link href="/dashboard">
+            <Button variant={"outline"} className="cursor-pointer">
+              Dashboard
+            </Button>
+          </Link>
         ) : (
           <Button asChild>
             <Link href="/create">Get Started</Link>

@@ -4,8 +4,15 @@ import axios from "axios";
 import Prompt from "@/app/_data/Prompt";
 import { Loader2Icon } from "lucide-react";
 
-function LogoIdea({ formData, onHandleInputChange }) {
-  const [ideas, setIdeas] = useState();
+import type { FormData } from "../page";
+
+interface LogoIdeaProps {
+  formData: FormData;
+  onHandleInputChange: (value: string) => void;
+}
+
+function LogoIdea({ formData, onHandleInputChange }: LogoIdeaProps) {
+  const [ideas, setIdeas] = useState<string[]>();
   const [isloading, setIsLoading] = useState(false);
   const [selectedOption, setSelectedOption] = useState(formData?.idea);
 
@@ -18,7 +25,6 @@ function LogoIdea({ formData, onHandleInputChange }) {
       "{logoType}",
       formData?.design.title
     )
-      .replace("{logoType}", formData?.design.title)
       .replace("{logoTitle}", formData?.logoTitle)
       .replace("{logoDesc}", formData?.desc)
       .replace("{logoPrompt}", formData?.design.prompt)

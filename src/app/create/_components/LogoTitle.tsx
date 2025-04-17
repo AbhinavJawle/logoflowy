@@ -4,16 +4,16 @@ import HeadingDescription from "./HeadingDescription";
 import { Input } from "@/components/ui/input";
 import { useSearchParams } from "next/navigation";
 
+import type { FormData } from "../page";
+
 interface LogoTitleProps {
   onHandleInputChange: (value: string) => void;
-  formData?: any;
+  formData: FormData;
 }
 
 function LogoTitle({ onHandleInputChange, formData }: LogoTitleProps) {
   const searchParams = useSearchParams();
-  const [logoTitle, useLogoTitle] = useState(
-    searchParams?.get("logoTitle") ?? ""
-  );
+  const [logoTitle, setLogoTitle] = useState<string>(searchParams?.get("logoTitle") ?? "");
   return (
     <div className="max-w-2xl mx-auto mb-4">
       <HeadingDescription

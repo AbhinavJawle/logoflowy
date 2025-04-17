@@ -82,6 +82,12 @@ function LogoList() {
                 className="bg-slate-200 animate-pulse rounded-xl w-full h-[300px]"
               ></div>
             ))}
+
+        {logoList?.length === 0 && (
+          <h2 className="text-base font-medium text-gray-700">
+            No Logos Found
+          </h2>
+        )}
       </div>
       {/* Modal Implementation */}
       {modalImage && (

@@ -12,7 +12,7 @@ import LogoSimplicity from "./_components/LogoSimplicity";
 import LogoSep from "./_components/LogoSep";
 import LogoOnly from "./_components/LogoOnly";
 
-interface FormData {
+export interface FormData {
   logoTitle?: string;
   desc?: string;
   palette?: string;

@@ -3,9 +3,11 @@ import HeadingDescription from "./HeadingDescription";
 import { Input } from "@/components/ui/input";
 import Colors from "@/app/_data/Colors";
 
+import type { FormData } from "../page";
+
 interface LogoColorPaletteProps {
   onHandleInputChange: (value: string) => void;
-  formData?: any;
+  formData: FormData;
 }
 
 function LogoColorPalette({
@@ -21,11 +23,6 @@ function LogoColorPalette({
         description={
           "Pick the colors that reflect your brands personality and create a lasting impression."
         }
-      />
-      <Input
-        placeholder="Enter your description"
-        className="w-full rounded-md focus-visible:ring-offset-0 focus-visible:ring-1 mb-6"
-        onChange={(e) => onHandleInputChange(e.target.value)}
       />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">

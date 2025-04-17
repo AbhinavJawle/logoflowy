@@ -4,9 +4,11 @@ import HeadingDescription from "./HeadingDescription";
 import SimpleData from "@/app/_data/SimpleData";
 import Image from "next/image";
 
+import type { FormData } from "../page";
+
 interface LogoSimplicityProps {
   onHandleInputChange: (value: any) => void;
-  formData?: any;
+  formData: FormData;
 }
 
 function LogoSimplicity({
