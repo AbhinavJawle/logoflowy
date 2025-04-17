@@ -5,6 +5,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/configs/FirebaseConfig";
 import Link from "next/link";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
 
 function LogoList() {
   const { userDetail, setUserDetail } = useContext(UserDetailContext);
@@ -23,7 +24,32 @@ function LogoList() {
     });
   };
 
-  const ViewLogo = (image) => {};
+  const [modalImage, setModalImage] = useState(null);
+  const [downloading, setDownloading] = useState(false);
+
+  // Download function (referenced from page.tsx)
+  const handleDownload = async (imageUrl) => {
+    if (!imageUrl) return;
+    setDownloading(true);
+    try {
+      const response = await fetch(imageUrl);
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "ai-logo.png";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error("Download failed:", err);
+    }
+    setDownloading(false);
+  };
+
+  const ViewLogo = (image) => setModalImage(image);
+  const CloseModal = () => setModalImage(null);
 
   return (
     <div className="min-h-screen bg-gray-50 py-10 px-4 flex flex-col items-center">
@@ -50,13 +76,55 @@ function LogoList() {
                 </h2>
               </div>
             ))
-          : [1, 2, 3, 4, 5, 6].map((item, index) => (
+          : [1, 2, 3, 4, 5, 6, 7, 8].map((item, index) => (
               <div
                 key={index}
                 className="bg-slate-200 animate-pulse rounded-xl w-full h-[300px]"
               ></div>
             ))}
       </div>
+      {/* Modal Implementation */}
+      {modalImage && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          {/* Glassy backdrop for modal, keeps page visible but blurs/dims */}
+          <div className="absolute inset-0 backdrop-blur-sm bg-white/40 transition-all duration-300" />
+          <div
+            className="relative bg-white/80 border border-gray-200 rounded-2xl shadow-2xl p-10 flex flex-col items-center max-w-[96vw] max-h-[98vh] backdrop-blur-xl"
+            style={{ boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.2)" }}
+          >
+            <Image
+              src={modalImage?.image || modalImage}
+              alt={modalImage?.title || "Logo Preview"}
+              width={360}
+              height={360}
+              className="rounded-xl object-contain max-h-[70vh] max-w-full mb-4"
+            />
+            <h2 className="text-2xl font-bold text-gray-900 text-center w-full truncate mb-1">
+              Logo Preview
+            </h2>
+            <div className="mb-6 text-base font-medium text-gray-700 text-center w-full truncate">
+              {modalImage?.title || ""}
+            </div>
+            <div className="flex gap-4 w-full justify-center mt-2">
+              <Button
+                onClick={() => handleDownload(modalImage?.image || modalImage)}
+                className="px-6 py-2 text-white font-semibold shadow duration-200 cursor-pointer disabled:opacity-60"
+                disabled={downloading}
+                variant={"default"}
+              >
+                {downloading ? "Downloading..." : "Download"}
+              </Button>
+              <Button
+                onClick={CloseModal}
+                className="px-6 py-2font-semibold shadow transition-colors duration-200 cursor-pointer"
+                variant={"outline"}
+              >
+                Return
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

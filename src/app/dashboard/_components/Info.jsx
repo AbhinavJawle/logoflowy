@@ -18,7 +18,10 @@ function Info() {
           </span>
         </div>
         <Link href={"/create"}>
-          <Button className="px-6 py-2 text-base font-medium bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow transition-colors duration-200 cursor-pointer">
+          <Button
+            variant={"default"}
+            className="px-6 py-2 font-medium cursor-pointer shadow"
+          >
             Create Logo
           </Button>
         </Link>
