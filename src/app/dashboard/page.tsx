@@ -6,7 +6,6 @@ function Dashboard() {
   return (
     <div>
       <Info />
-
       <LogoList />
     </div>
   );

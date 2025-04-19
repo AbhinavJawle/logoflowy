@@ -79,6 +79,7 @@ export async function POST(req: NextRequest) {
 
     const response = await axios.post(
       "https://fal.run/fal-ai/flux/schnell",
+      // "https://fal.run/fal-ai/recraft-20b",
       AiPrompt,
       {
         headers: {

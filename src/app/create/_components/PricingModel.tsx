@@ -58,6 +58,8 @@ function PricingModel({
               <SignInButton
                 mode="modal"
                 forceRedirectUrl={"/create-logo?type=" + plan.title}
+                signUpForceRedirectUrl={"/create-logo?type=" + plan.title}
+                fallbackRedirectUrl={"/create-logo?type=" + plan.title}
               >
                 <button className="mt-auto py-2 px-8 bg-primary text-white rounded-md font-medium cursor-pointer hover:bg-primary/90 transition-colors">
                   {plan.button}

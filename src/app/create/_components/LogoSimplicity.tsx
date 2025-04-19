@@ -40,14 +40,14 @@ function LogoSimplicity({
               onHandleInputChange(simplicity);
             }}
           >
-            <div className="relative h-48 w-full overflow-hidden bg-gray-50">
+            {/* <div className="relative h-48 w-full overflow-hidden bg-gray-50">
               <Image
                 src={simplicity.image}
                 alt={simplicity.title}
                 fill
                 className="object-cover"
               />
-            </div>
+            </div> */}
             <div className="py-2 px-3 text-center bg-white text-sm font-medium">
               {simplicity.title}
             </div>

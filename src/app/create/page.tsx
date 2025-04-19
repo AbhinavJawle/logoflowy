@@ -9,8 +9,7 @@ import LogoDesigns from "./_components/LogoDesigns";
 import LogoIdea from "./_components/LogoIdea";
 import PricingModel from "./_components/PricingModel";
 import LogoSimplicity from "./_components/LogoSimplicity";
-import LogoSep from "./_components/LogoSep";
-import LogoOnly from "./_components/LogoOnly";
+import LogoTone from "./_components/LogoTone";
 
 export interface FormData {
   logoTitle?: string;
@@ -19,9 +18,9 @@ export interface FormData {
   design?: { title: string; image: string; prompt: string };
   idea?: string;
   simplicity?: { title: string; prompt: string };
-  logoSep?: { title: string; prompt: string };
-  logoOnly?: { title: string; prompt: string };
+
   pricing?: string;
+  logoTone?: { title: string; prompt: string };
 }
 
 function Createlogo() {
@@ -77,27 +76,20 @@ function Createlogo() {
             }
           />
         ) : step === 6 ? (
-          <LogoSep
+          <LogoTone
             formData={formData}
             onHandleInputChange={(value: string) =>
-              onHandleInputChange("logoSep", value)
+              onHandleInputChange("logoTone", value)
             }
           />
         ) : step === 7 ? (
-          <LogoOnly
-            formData={formData}
-            onHandleInputChange={(value: string) =>
-              onHandleInputChange("logoOnly", value)
-            }
-          />
-        ) : step === 8 ? (
           <LogoIdea
             formData={formData}
             onHandleInputChange={(value: string) =>
               onHandleInputChange("idea", value)
             }
           />
-        ) : step === 9 ? (
+        ) : step === 8 ? (
           <PricingModel
             formData={formData}
             onHandleInputChange={(value: string) =>

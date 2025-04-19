@@ -1,11 +1,23 @@
 "use client";
 import { UserDetailContext } from "@/app/_context/UserDetailContext";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 function Info() {
   const { userDetail, setUserDetail } = useContext(UserDetailContext);
+
+  // const getUserCredits = async () => {
+  //   const responseCredit = await userDetail?.credits;
+  //   setUserDetail({
+  //     ...userDetail,
+  //     credits: responseCredit,
+  //   });
+  // };
+
+  // useEffect(() => {
+  //   getUserCredits();
+  // }, []);
   return (
     <div className="w-full max-w-5xl mx-auto bg-white rounded-xl shadow p-6 mt-6 mb-10">
       <div className="flex items-center justify-between w-full">
