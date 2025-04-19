@@ -3,17 +3,34 @@ import React, { useState } from "react";
 import HeadingDescription from "./HeadingDescription";
 import { Input } from "@/components/ui/input";
 import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 
 import type { FormData } from "../page";
 
 interface LogoTitleProps {
   onHandleInputChange: (value: string) => void;
   formData: FormData;
+  onInputValidityChange: (isValid: boolean) => void;
 }
 
-function LogoTitle({ onHandleInputChange, formData }: LogoTitleProps) {
+function LogoTitle({
+  onHandleInputChange,
+  formData,
+  onInputValidityChange,
+}: LogoTitleProps) {
   const searchParams = useSearchParams();
-  const [logoTitle, setLogoTitle] = useState<string>(searchParams?.get("logoTitle") ?? "");
+  const logoTitleParam = searchParams?.get("logoTitle") ?? "";
+
+  useEffect(() => {
+    if (!formData.logoTitle && logoTitleParam) {
+      onHandleInputChange(logoTitleParam);
+    }
+  }, [logoTitleParam, formData.logoTitle, onHandleInputChange]);
+
+  useEffect(() => {
+    onInputValidityChange(!!formData.logoTitle?.trim());
+  }, [formData.logoTitle, onInputValidityChange]);
+
   return (
     <div className="max-w-2xl mx-auto mb-4">
       <HeadingDescription
@@ -25,7 +42,7 @@ function LogoTitle({ onHandleInputChange, formData }: LogoTitleProps) {
       <Input
         placeholder="Enter your brand name"
         className="w-full rounded-md focus-visible:ring-offset-0 focus-visible:ring-1"
-        value={formData.logoTitle}
+        defaultValue={formData.logoTitle}
         onChange={(e) => onHandleInputChange(e.target.value)}
       />
     </div>
@@ -43,4 +60,3 @@ export function LogoTitleComponent(props: LogoTitleProps) {
 }
 
 export default LogoTitleComponent;
-

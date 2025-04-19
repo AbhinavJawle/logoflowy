@@ -26,6 +26,7 @@ export interface FormData {
 function Createlogo() {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState<FormData>({});
+  const [isLogoTitleValid, setIsLogoTitleValid] = useState(false);
 
   const onHandleInputChange = (field: keyof FormData, value: any) => {
     setFormData((prev) => ({
@@ -39,13 +40,14 @@ function Createlogo() {
   return (
     <div className="container mx-auto px-4 md:px-6 py-8">
       <div className="mt-4 md:mt-8 lg:mt-12 p-6 md:p-8 border rounded-lg shadow-sm bg-white max-w-3xl mx-auto">
-        {/* //Entire form and step management logi is here: */}
+        {/* //Entire form and step management logic is here: */}
         {step === 1 ? (
           <LogoTitle
             formData={formData}
             onHandleInputChange={(value: string) =>
               onHandleInputChange("logoTitle", value)
             }
+            onInputValidityChange={setIsLogoTitleValid}
           />
         ) : step === 2 ? (
           <LogoDesc
@@ -109,14 +111,19 @@ function Createlogo() {
               <span>Previous</span>
             </Button>
           )}
-          {/* <div className="flex-grow"></div> */}
-          <Button
-            className="cursor-pointer flex items-center gap-2"
-            onClick={() => setStep(step + 1)}
-          >
-            <span>Next</span>
-            <StepForward className="h-5 w-5" />
-          </Button>
+          {(() => {
+            const isNextDisabled = !isLogoTitleValid;
+            return (
+              <Button
+                className="cursor-pointer flex items-center gap-2"
+                onClick={() => setStep(step + 1)}
+                disabled={isNextDisabled}
+              >
+                <span>Next</span>
+                <StepForward className="h-5 w-5" />
+              </Button>
+            );
+          })()}
         </div>
       </div>
     </div>
