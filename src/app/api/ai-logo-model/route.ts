@@ -58,7 +58,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { AIDesignLogoGenerate } from "@/configs/Aimodels";
 import axios from "axios";
-import { Buffer } from "buffer";
 import { doc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "@/configs/FirebaseConfig";
 

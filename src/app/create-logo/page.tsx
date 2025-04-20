@@ -69,13 +69,6 @@ function CreateLogo() {
 
     setLogoImage(result.data.images[0].url);
 
-    // Optimistically update credits in context
-    // setUserDetail((prev: any) => ({
-    //   ...prev,
-    //   credits: prev.credits,
-    // }));
-
-    // Refetch user details from backend to ensure consistency
     if (userDetail?.email && userDetail?.name) {
       try {
         const res = await fetch("/api/users", {
