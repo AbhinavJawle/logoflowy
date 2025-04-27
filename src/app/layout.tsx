@@ -21,6 +21,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "LogoFlowy",
   description: "Generate a custom logo for your brand",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
