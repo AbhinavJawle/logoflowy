@@ -4,6 +4,7 @@ import axios from "axios";
 import { doc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "@/configs/FirebaseConfig";
 import Replicate from "replicate";
+import { v2 as cloudinary } from "cloudinary";
 
 export async function POST(req: NextRequest) {
   const { prompt, email, title, desc, userCredits } = await req.json();
@@ -51,13 +52,25 @@ export async function POST(req: NextRequest) {
     //=> "http://example.com"
 
     const imageAIUrl = response[0].url().href;
+    let cleanedImageUrl = imageAIUrl;
+    try {
+      const uploadResult = await cloudinary.uploader.upload(imageAIUrl, {
+        transformation: [
+          { effect: "upscale" },
+          { effect: "background_removal" },
+        ],
+      });
+      cleanedImageUrl = uploadResult.secure_url;
+    } catch (err) {
+      console.error("Cloudinary background removal error:", err);
+    }
     // const imageAIUrl = response.data.output[0];
 
     try {
       const docRef = doc(db, "users", email);
 
       await setDoc(doc(db, "users", email, "logos", Date.now().toString()), {
-        image: imageAIUrl,
+        image: cleanedImageUrl,
         title: title,
         desc: desc,
       });
@@ -70,7 +83,7 @@ export async function POST(req: NextRequest) {
     }
     // return NextResponse.json(AiPrompt);
     // return NextResponse.json(response);
-    return NextResponse.json({ image: imageAIUrl });
+    return NextResponse.json({ image: cleanedImageUrl });
   } catch (error) {
     console.log(error);
     let errorMessage = "Unknown error";

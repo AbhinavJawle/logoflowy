@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       new URL("https://v3.fal.media/files/**"),
       new URL("https://replicate.delivery/**"),
+      new URL("https://res.cloudinary.com/**"),
     ],
   },
 };
