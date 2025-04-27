@@ -9,7 +9,7 @@ import Link from "next/link";
 function Hero() {
   const [logoTitle, setLogoTitle] = useState<string>("");
   return (
-    <section className="py-16 md:py-24 lg:py-32 bg-[url('/background.jpg')] bg-cover bg-center bg-no-repeat">
+    <section className="relative left-1/2 -translate-x-1/2 w-screen py-16 md:py-24 lg:py-32 bg-gradient-to-br from-purple-100 via-15% to-red-100">
       <div className="container mx-auto text-center space-y-12">
         <div className="space-y-4 max-w-3xl mx-auto">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900">

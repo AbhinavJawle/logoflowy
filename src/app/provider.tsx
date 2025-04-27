@@ -27,7 +27,7 @@ function Provider({ children }: { children: React.ReactNode }) {
     <UserDetailContext.Provider value={{ userDetail, setUserDetail }}>
       <div className="flex flex-col min-h-screen bg-slate-50">
         <Header />
-        <main className="flex-grow container mx-auto px-4 md:px-6 py-8 md:py-12">
+        <main className="flex-grow container mx-auto px-0 md:px-0 py-1 md:py-1">
           {children}
         </main>
       </div>
