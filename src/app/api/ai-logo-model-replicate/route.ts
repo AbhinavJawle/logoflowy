@@ -3,9 +3,14 @@ import { AIDesignLogoGenerate } from "@/configs/Aimodels";
 import axios from "axios";
 import { doc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "@/configs/FirebaseConfig";
+import Replicate from "replicate";
 
 export async function POST(req: NextRequest) {
   const { prompt, email, title, desc, userCredits } = await req.json();
+
+  const replicate = new Replicate({
+    auth: process.env.REPLICATE_API_TOKEN,
+  });
 
   try {
     const AiPromptResult = await AIDesignLogoGenerate.sendMessage({
@@ -19,23 +24,33 @@ export async function POST(req: NextRequest) {
     }
     const AiPrompt = JSON.parse(AiPromptResult.text);
 
-    const response = await axios.post(
-      "https://fal.run/fal-ai/flux/schnell",
-      // "https://fal.run/fal-ai/recraft-20b",
-      // "https://api.replicate.com/v1/models/black-forest-labs/flux-schnell/predictions",
-      AiPrompt,
-      {
-        headers: {
-          // Authorization: "Bearer " + process.env.HUGGING_FACE_API,
-          // Authorization: "Key " + process.env.FAL_API_KEY,
-          Authorization: "Bearer " + process.env.REPLICATE_API_TOKEN,
+    const input = {
+      prompt: AiPromptResult.text,
+      go_fast: true,
+      megapixels: "1",
+      num_outputs: 1,
+      aspect_ratio: "1:1",
+      output_format: "png",
+      output_quality: 80,
+      num_inference_steps: 4,
+    };
 
-          "Content-Type": "application/json",
-        },
+    const response: any = await replicate.run(
+      "black-forest-labs/flux-schnell",
+      {
+        input,
       }
     );
 
-    const imageAIUrl = response.data.images[0].url;
+    console.log("Response", response);
+    console.log("Response0", response[0]);
+
+    console.log("URL011", response[0].url());
+
+    console.log("URL011", response[0].url().href); //=> "http://example.com"
+    //=> "http://example.com"
+
+    const imageAIUrl = response[0].url().href;
     // const imageAIUrl = response.data.output[0];
 
     try {
@@ -54,7 +69,8 @@ export async function POST(req: NextRequest) {
       console.log(error);
     }
     // return NextResponse.json(AiPrompt);
-    return NextResponse.json(response.data);
+    // return NextResponse.json(response);
+    return NextResponse.json({ image: imageAIUrl });
   } catch (error) {
     console.log(error);
     let errorMessage = "Unknown error";

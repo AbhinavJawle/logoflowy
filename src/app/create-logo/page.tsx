@@ -13,12 +13,14 @@ import Link from "next/link";
 import { Loader2, LayoutDashboard } from "lucide-react";
 import { toast } from "sonner";
 import { redirect } from "next/dist/server/api-utils";
+import { renderToString } from "react-dom/server";
 
 function CreateLogo() {
   const { userDetail, setUserDetail } = useContext(UserDetailContext);
   const [formData, setFormData] = useState<FormData>();
   const [loading, setLoading] = useState(false);
   const [logoImage, setLogoImage] = useState("");
+  const [svgIcon, setSvgIcon] = useState("");
 
   useEffect(() => {
     if (typeof window != undefined && userDetail?.email) {
@@ -34,7 +36,7 @@ function CreateLogo() {
     if (formData?.logoTitle) {
       generateAILogo();
     }
-  }, [formData]);
+  }, [formData?.logoTitle]);
 
   const generateAILogo = async () => {
     if (userDetail?.credits <= 0) {
@@ -59,7 +61,7 @@ function CreateLogo() {
     console.log("PROMPT", PROMPT);
 
     //generate image
-    const result = await axios.post("/api/ai-logo-model", {
+    const result = await axios.post("/api/ai-logo-model-replicate", {
       prompt: PROMPT,
       email: userDetail?.email,
       title: formData?.logoTitle,
@@ -67,8 +69,8 @@ function CreateLogo() {
       userCredits: userDetail?.credits,
     });
 
-    setLogoImage(result.data.images[0].url);
-
+    console.log("image url", result.data.image);
+    setLogoImage(result.data.image);
     if (userDetail?.email && userDetail?.name) {
       try {
         const res = await fetch("/api/users", {
@@ -89,11 +91,26 @@ function CreateLogo() {
       }
     }
     setLoading(false);
+
+    // const SVGComponent = (props: any) => (
+    //   <svg
+    //     xmlns="http://www.w3.org/2000/svg"
+    //     width={400}
+    //     height={400}
+    //     viewBox="0 0 256 256"
+    //     {...props}
+    //   >
+    //     <image href={logoImage} width="100%" height="100%" />
+    //   </svg>
+    // );
+
+    // const svgIcon = renderToString(<SVGComponent />);
   };
 
   const handleDownload = async () => {
     if (!logoImage) return;
     try {
+      // const svgIconResponse = await fetch(svgIcon);
       const response = await fetch(logoImage);
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
@@ -104,6 +121,8 @@ function CreateLogo() {
       link.click();
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
+
+      // console.log("SVG Icon", svgIcon);
     } catch (err) {
       console.error("Download failed:", err);
     }
