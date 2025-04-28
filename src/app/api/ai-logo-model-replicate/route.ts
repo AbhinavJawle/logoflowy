@@ -56,11 +56,13 @@ export async function POST(req: NextRequest) {
     try {
       const uploadResult = await cloudinary.uploader.upload(imageAIUrl, {
         transformation: [
-          { effect: "upscale" },
           { effect: "background_removal" },
+          { effect: "vectorize:detail:1.0:corners:40:colors:3" },
         ],
+        format: "svg",
       });
       cleanedImageUrl = uploadResult.secure_url;
+      console.log("cleanedImageUrl", cleanedImageUrl);
     } catch (err) {
       console.error("Cloudinary background removal error:", err);
     }
