@@ -35,6 +35,18 @@ importers:
       '@radix-ui/react-tooltip':
         specifier: ^1.2.4
         version: 1.2.4(@types/react-dom@19.1.2(@types/react@19.1.1))(@types/react@19.1.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@uiw/color-convert':
+        specifier: ^2.5.2
+        version: 2.5.2(@babel/runtime@7.27.0)
+      '@uiw/react-color-editable-input':
+        specifier: ^2.5.2
+        version: 2.5.2(@babel/runtime@7.27.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@uiw/react-color-hue':
+        specifier: ^2.5.2
+        version: 2.5.2(@babel/runtime@7.27.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@uiw/react-color-saturation':
+        specifier: ^2.5.2
+        version: 2.5.2(@babel/runtime@7.27.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       axios:
         specifier: ^1.8.4
         version: 1.8.4
@@ -114,6 +126,10 @@ packages:
   '@alloc/quick-lru@5.2.0':
     resolution: {integrity: sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==}
     engines: {node: '>=10'}
+
+  '@babel/runtime@7.27.0':
+    resolution: {integrity: sha512-VtPOkrdPHZsKc/clNqyi9WUA8TINkZ4cGk63UUE3u4pmB2k+ZMQRDuIOagv8UVd6j7k0T3+RRIb7beKTebNbcw==}
+    engines: {node: '>=6.9.0'}
 
   '@clerk/backend@1.28.0':
     resolution: {integrity: sha512-5DFR/wMh9icvpmQGRGDLvizO2ypI+4Sa9wQn2towMWaRKPHAP4a3N4XU6cH5ON5hC206wzzILcF1dKADMQUXWw==}
@@ -1033,6 +1049,46 @@ packages:
   '@types/react@19.1.1':
     resolution: {integrity: sha512-ePapxDL7qrgqSF67s0h9m412d9DbXyC1n59O2st+9rjuuamWsZuD2w55rqY12CbzsZ7uVXb5Nw0gEp9Z8MMutQ==}
 
+  '@uiw/color-convert@2.5.2':
+    resolution: {integrity: sha512-wIFMAJ0/AoUE5cisHMGIenoZJhF7ZNesJOofuAR0S7wo/vxnLs3pRDcSr4phEGDFhNKmzlPLFplXo9bQGA+KMw==}
+    peerDependencies:
+      '@babel/runtime': '>=7.19.0'
+
+  '@uiw/react-color-alpha@2.5.2':
+    resolution: {integrity: sha512-EP4ScP58BipDoM2Z4we+4HyiYzGSvFZjxnqg81rgRhHc7FLRcdgtRviZed4LTsu64lpOIitNGCNTyfWcujHurw==}
+    peerDependencies:
+      '@babel/runtime': '>=7.19.0'
+      react: '>=16.9.0'
+      react-dom: '>=16.9.0'
+
+  '@uiw/react-color-editable-input@2.5.2':
+    resolution: {integrity: sha512-2FLI3Yvs7lBEp5ZmONd3luZ+fWCrIIPLGgfUZ3miZ9x0ZVhrfra1vnCUdEd8GGM+P8C//TXb5ALjbo5jTSsRCA==}
+    peerDependencies:
+      '@babel/runtime': '>=7.19.0'
+      react: '>=16.9.0'
+      react-dom: '>=16.9.0'
+
+  '@uiw/react-color-hue@2.5.2':
+    resolution: {integrity: sha512-iPX8sssw71ON60IsFUY9ltnBNm5AG/PD/19pE6L79SmUltXsMMqGyBhZ/ggdINRyIFL6o4WnAsJUS34jlku3Cg==}
+    peerDependencies:
+      '@babel/runtime': '>=7.19.0'
+      react: '>=16.9.0'
+      react-dom: '>=16.9.0'
+
+  '@uiw/react-color-saturation@2.5.2':
+    resolution: {integrity: sha512-t3Y/pbuxNDjHe+xEkKw2GyDepWzRyhx5FYq8U+v6nmvrtbrkvJpykWUd7SSUa7kVlJwu7xyiC7lrGzF4MMDa0A==}
+    peerDependencies:
+      '@babel/runtime': '>=7.19.0'
+      react: '>=16.9.0'
+      react-dom: '>=16.9.0'
+
+  '@uiw/react-drag-event-interactive@2.5.2':
+    resolution: {integrity: sha512-sdRBiaPGP5J7jl9uUFWP7MvExNG+EQsa4jb23EBrNMEFoDmNKE57mIWqNbgewLfoXA95mwQoZnK9aVYRyJZhtw==}
+    peerDependencies:
+      '@babel/runtime': '>=7.19.0'
+      react: '>=16.9.0'
+      react-dom: '>=16.9.0'
+
   abab@2.0.6:
     resolution: {integrity: sha512-j2afSsaIENvHZN2B8GOpF566vZ5WVk5opAiMTvWgaQT8DkbOqsTfvNAvHoRGU2zzP8cPoqys+xHTRDWW8L+/BA==}
     deprecated: Use your platform's native atob() and btoa() methods instead
@@ -1788,6 +1844,9 @@ packages:
     resolution: {integrity: sha512-oIGGmcpTLwPga8Bn6/Z75SVaH1z5dUut2ibSyAMVhmUggWpmDn2dapB0n7f8nwaSiRtepAsfJyfXIO5DCVAODg==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
 
+  regenerator-runtime@0.14.1:
+    resolution: {integrity: sha512-dYnhHh0nJoMfnkZs6GmmhFknAGRrLznOu5nc9ML+EJxGvrx6H7teuevqVqCuPcPK//3eDrrjQhehXVx9cnkGdw==}
+
   replicate@1.0.1:
     resolution: {integrity: sha512-EY+rK1YR5bKHcM9pd6WyaIbv6m2aRIvHfHDh51j/LahlHTLKemTYXF6ptif2sLa+YospupAsIoxw8Ndt5nI3vg==}
     engines: {git: '>=2.11.0', node: '>=18.0.0', npm: '>=7.19.0', yarn: '>=1.7.0'}
@@ -2100,6 +2159,10 @@ packages:
 snapshots:
 
   '@alloc/quick-lru@5.2.0': {}
+
+  '@babel/runtime@7.27.0':
+    dependencies:
+      regenerator-runtime: 0.14.1
 
   '@clerk/backend@1.28.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
@@ -3065,6 +3128,46 @@ snapshots:
     dependencies:
       csstype: 3.1.3
 
+  '@uiw/color-convert@2.5.2(@babel/runtime@7.27.0)':
+    dependencies:
+      '@babel/runtime': 7.27.0
+
+  '@uiw/react-color-alpha@2.5.2(@babel/runtime@7.27.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@babel/runtime': 7.27.0
+      '@uiw/color-convert': 2.5.2(@babel/runtime@7.27.0)
+      '@uiw/react-drag-event-interactive': 2.5.2(@babel/runtime@7.27.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+
+  '@uiw/react-color-editable-input@2.5.2(@babel/runtime@7.27.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@babel/runtime': 7.27.0
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+
+  '@uiw/react-color-hue@2.5.2(@babel/runtime@7.27.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@babel/runtime': 7.27.0
+      '@uiw/color-convert': 2.5.2(@babel/runtime@7.27.0)
+      '@uiw/react-color-alpha': 2.5.2(@babel/runtime@7.27.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+
+  '@uiw/react-color-saturation@2.5.2(@babel/runtime@7.27.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@babel/runtime': 7.27.0
+      '@uiw/color-convert': 2.5.2(@babel/runtime@7.27.0)
+      '@uiw/react-drag-event-interactive': 2.5.2(@babel/runtime@7.27.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+
+  '@uiw/react-drag-event-interactive@2.5.2(@babel/runtime@7.27.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@babel/runtime': 7.27.0
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+
   abab@2.0.6:
     optional: true
 
@@ -3915,6 +4018,8 @@ snapshots:
       process: 0.11.10
       string_decoder: 1.3.0
     optional: true
+
+  regenerator-runtime@0.14.1: {}
 
   replicate@1.0.1:
     optionalDependencies:

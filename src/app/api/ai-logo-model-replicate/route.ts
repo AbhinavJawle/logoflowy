@@ -27,21 +27,20 @@ export async function POST(req: NextRequest) {
 
     const input = {
       prompt: AiPromptResult.text,
-      go_fast: true,
+      go_fast: false,
       megapixels: "1",
       num_outputs: 1,
       aspect_ratio: "1:1",
       output_format: "png",
-      output_quality: 80,
+      output_quality: 100,
       num_inference_steps: 4,
     };
 
-    const response: any = await replicate.run(
-      "black-forest-labs/flux-schnell",
-      {
-        input,
-      }
-    );
+    // "recraft-ai/recraft-20b-svg",
+
+    const response: any = await replicate.run("black-forest-labs/flux-schnell", {
+      input,
+    });
 
     console.log("URL011", response[0].url().href); //=> "http://example.com"
 
@@ -82,7 +81,11 @@ export async function POST(req: NextRequest) {
     }
     // return NextResponse.json(AiPrompt);
     // return NextResponse.json(response);
-    return NextResponse.json({ image: cleanedImageUrl, svgIcon: svgIcon.data });
+    return NextResponse.json({
+      image: cleanedImageUrl,
+      svgIcon: svgIcon.data,
+      aiprompt: AiPromptResult.text,
+    });
   } catch (error) {
     console.log(error);
     let errorMessage = "Unknown error";

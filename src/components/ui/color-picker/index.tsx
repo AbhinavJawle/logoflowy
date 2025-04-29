@@ -1,22 +1,22 @@
-'use client';
-import * as React from 'react';
-import Saturation from '@uiw/react-color-saturation';
-import Hue from '@uiw/react-color-hue';
-import EditableInput from '@uiw/react-color-editable-input';
-import { hexToHsva, hsvaToHex, validHex } from '@uiw/color-convert';
-import { cn } from '@/lib/utils';
-import { useDebounce } from '@/hooks/use-debounce';
-import './styles.css';
+"use client";
+import * as React from "react";
+import Saturation from "@uiw/react-color-saturation";
+import Hue from "@uiw/react-color-hue";
+import EditableInput from "@uiw/react-color-editable-input";
+import { hexToHsva, hsvaToHex, validHex } from "@uiw/color-convert";
+import { cn } from "@/lib/utils";
+import { useDebounce } from "@/app/hooks/use-debounce";
+import "./styles.css";
 
 interface ColorPickerProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
   value?: string;
   onChange?: (value: string) => void;
 }
 
 const ColorPicker = React.forwardRef<HTMLDivElement, ColorPickerProps>(
   ({ className, onChange, value, ...props }, ref) => {
-    const [hsva, setHsva] = React.useState(hexToHsva(value || '#1c1d1f'));
+    const [hsva, setHsva] = React.useState(hexToHsva(value || "#1c1d1f"));
     const debouncedValue = useDebounce(hsvaToHex(hsva));
 
     React.useEffect(() => {
@@ -28,7 +28,7 @@ const ColorPicker = React.forwardRef<HTMLDivElement, ColorPickerProps>(
     return (
       <div
         ref={ref}
-        className={cn('max-w-56 flex flex-col gap-y-3 p-2', className)}
+        className={cn("max-w-56 flex flex-col gap-y-3 p-2", className)}
         {...props}
       >
         <Saturation
@@ -60,9 +60,9 @@ const ColorPicker = React.forwardRef<HTMLDivElement, ColorPickerProps>(
         </div>
       </div>
     );
-  },
+  }
 );
 
-ColorPicker.displayName = 'ColorPicker';
+ColorPicker.displayName = "ColorPicker";
 
 export { ColorPicker };

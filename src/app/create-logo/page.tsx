@@ -13,6 +13,7 @@ import Link from "next/link";
 import { Loader2, LayoutDashboard } from "lucide-react";
 import { toast } from "sonner";
 import { renderToString } from "react-dom/server";
+import { Navbar } from "../(components)/navbar";
 
 import type { Metadata } from "next";
 import type { Logo } from "@/app/(types)/logo";
@@ -78,9 +79,16 @@ function CreateLogo() {
       userCredits: userDetail?.credits,
     });
 
+    console.log("aiPROMPT", result.data.aiprompt);
+
     console.log("SVG data received:", result.data.svgIcon ? "Yes" : "No");
-    console.log("SVG content sample:", result.data.svgIcon ? result.data.svgIcon.substring(0, 100) + "..." : "None");
-    
+    console.log(
+      "SVG content sample:",
+      result.data.svgIcon
+        ? result.data.svgIcon.substring(0, 100) + "..."
+        : "None"
+    );
+
     // If we have SVG data, use it, otherwise fall back to image URL if present
     if (result.data.svgIcon) {
       setSvgIcon(result.data.svgIcon);
@@ -125,15 +133,15 @@ function CreateLogo() {
 
     // Update all logos in the data to include the image URL
     if (result.data.image) {
-      console.log('Using image URL for logos');
-      
-      setData(prevData => {
+      console.log("Using image URL for logos");
+
+      setData((prevData) => {
         // Create a deep copy of the data
         const newData = [...prevData];
         // Add image URL to all logos
-        return newData.map(logo => ({
+        return newData.map((logo) => ({
           ...logo,
-          imageUrl: result.data.image
+          imageUrl: result.data.image,
         }));
       });
     }
@@ -201,8 +209,13 @@ function CreateLogo() {
         )
       )}
       {/* AI-generated logo display */}
+
       <link rel="stylesheet" href={googleFontUrl} />
-      <LogoListGroup items={data} companyName={formData?.logoTitle} />
+      <Navbar />
+      {/* Wrap LogoListGroup in a centering container */}
+      <div className="flex justify-center items-start pt-10">
+        <LogoListGroup items={data} companyName={formData?.logoTitle} />
+      </div>
     </div>
   );
 }

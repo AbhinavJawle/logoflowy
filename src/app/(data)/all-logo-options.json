@@ -1,0 +1,352 @@
+[
+  {
+    "id": "rammetto_one-cybersphere",
+    "iconName": "Football",
+    "styles": {
+      "fontFamily": "Rammetto One",
+      "fontWeight": 400,
+      "fontSize": 22
+    }
+  },
+  {
+    "id": "rubik_vinyl-cybersphere",
+    "iconName": "Barcode",
+    "styles": {
+      "fontFamily": "Rubik Vinyl",
+      "fontWeight": 400,
+      "fontSize": 30
+    }
+  },
+  {
+    "id": "tilt_warp-football_helmet",
+    "iconName": "FootballHelmet",
+    "styles": {
+      "fontFamily": "Tilt Warp",
+      "fontWeight": 400,
+      "fontSize": 30
+    }
+  },
+  {
+    "id": "rye-barn",
+    "iconName": "Barn",
+    "styles": {
+      "fontFamily": "Rye",
+      "fontWeight": 400,
+      "fontSize": 28
+    }
+  },
+  {
+    "id": "black_ops_one-cybersphere",
+    "iconName": "Disc",
+    "styles": {
+      "fontFamily": "Black Ops One",
+      "fontWeight": 400,
+      "fontSize": 30
+    }
+  },
+  {
+    "id": "tsukimi_rounded-meteor",
+    "iconName": "Meteor",
+    "styles": {
+      "fontFamily": "Tsukimi Rounded",
+      "fontWeight": 700,
+      "fontSize": 30
+    }
+  },
+  {
+    "id": "syne-crosshair",
+    "iconName": "Crosshair",
+    "styles": {
+      "fontFamily": "Syne",
+      "fontWeight": 700,
+      "fontSize": 28
+    }
+  },
+  {
+    "id": "comfortaa-golf",
+    "iconName": "Golf",
+    "styles": {
+      "fontFamily": "Comfortaa",
+      "fontWeight": 700,
+      "fontSize": 30
+    }
+  },
+  {
+    "id": "hammersmith_one-armchair",
+    "iconName": "Armchair",
+    "styles": {
+      "fontFamily": "Hammersmith One",
+      "fontWeight": 400,
+      "fontSize": 34
+    }
+  },
+  {
+    "id": "hepta_slab-mailbox",
+    "iconName": "Mailbox",
+    "styles": {
+      "fontFamily": "Hepta Slab",
+      "fontWeight": 600,
+      "fontSize": 28
+    }
+  },
+  {
+    "id": "robot-jura",
+    "iconName": "Robot",
+    "styles": {
+      "fontFamily": "Jura",
+      "fontWeight": 700,
+      "fontSize": 30
+    }
+  },
+  {
+    "id": "playwrite_hr_lijeva-rainbow_cloud",
+    "iconName": "RainbowCloud",
+    "styles": {
+      "fontFamily": "Playwrite HR Lijeva",
+      "fontWeight": 400,
+      "fontSize": 30
+    }
+  },
+  {
+    "id": "poiret-one-basball_cap",
+    "iconName": "BaseballCap",
+    "styles": {
+      "fontFamily": "Poiret One",
+      "fontWeight": 400,
+      "fontSize": 36
+    }
+  },
+  {
+    "id": "montez-baby_carriage",
+    "iconName": "BabyCarriage",
+    "styles": {
+      "fontFamily": "Montez",
+      "fontWeight": 400,
+      "fontSize": 46
+    }
+  },
+  {
+    "id": "bruno_ace_sc-metronome",
+    "iconName": "Metronome",
+    "styles": {
+      "fontFamily": "Bruno Ace SC",
+      "fontWeight": 400,
+      "fontSize": 28
+    }
+  },
+  {
+    "id": "tourney-jeep",
+    "iconName": "Jeep",
+    "styles": {
+      "fontFamily": "Tourney",
+      "fontWeight": 600,
+      "fontSize": 30
+    }
+  },
+  {
+    "id": "dongle-chat_circle_dots",
+    "iconName": "ChatCircleDots",
+    "styles": {
+      "fontFamily": "Dongle",
+      "fontWeight": 700,
+      "fontSize": 50,
+      "marginTop": 6
+    }
+  },
+  {
+    "id": "barlow_condensed-high_heel",
+    "iconName": "HighHeel",
+    "styles": {
+      "fontFamily": "Barlow Condensed",
+      "fontWeight": 700,
+      "fontSize": 40
+    }
+  },
+  {
+    "id": "cybersphere",
+    "iconName": "Alien",
+    "styles": {
+      "fontFamily": "Gluten",
+      "fontWeight": 400,
+      "fontSize": 30,
+      "marginTop": 4
+    }
+  },
+  {
+    "id": "matemasie-flying_saucer",
+    "iconName": "FlyingSaucer",
+    "styles": {
+      "fontFamily": "Matemasie",
+      "fontWeight": 400,
+      "fontSize": 30,
+      "marginTop": -14
+    }
+  },
+  {
+    "id": "mochiy_pop_p_one-mountains",
+    "iconName": "Mountains",
+    "styles": {
+      "fontFamily": "Mochiy Pop P One",
+      "fontWeight": 400,
+      "fontSize": 28
+    }
+  },
+  {
+    "id": "caprasimo-hand_tap",
+    "iconName": "HandTap",
+    "styles": {
+      "fontFamily": "Caprasimo",
+      "fontWeight": 400,
+      "fontSize": 30
+    }
+  },
+  {
+    "id": "bungee_shade-flag_checkered",
+    "iconName": "FlagCheckered",
+    "styles": {
+      "fontFamily": "Bungee Shade",
+      "fontWeight": 400,
+      "fontSize": 25
+    }
+  },
+  {
+    "id": "poppins-leaf",
+    "iconName": "Leaf",
+    "styles": {
+      "fontFamily": "Poppins",
+      "fontWeight": 400,
+      "fontSize": 28
+    }
+  },
+  {
+    "id": "train_one-boat",
+    "iconName": "Boat",
+    "styles": {
+      "fontFamily": "Train One",
+      "fontWeight": 400,
+      "fontSize": 28
+    }
+  },
+  {
+    "id": "righteous-chats",
+    "iconName": "Chats",
+    "styles": {
+      "fontFamily": "Righteous",
+      "fontWeight": 400,
+      "fontSize": 32
+    }
+  },
+  {
+    "id": "pixelify_sans-game_controller",
+    "iconName": "GameController",
+    "styles": {
+      "fontFamily": "Pixelify Sans",
+      "fontWeight": 500,
+      "fontSize": 32
+    }
+  },
+  {
+    "id": "freckle_face-ghost",
+    "iconName": "Ghost",
+    "styles": {
+      "fontFamily": "Freckle Face",
+      "fontWeight": 400,
+      "fontSize": 34
+    }
+  },
+  {
+    "id": "special_elite-skull",
+    "iconName": "Skull",
+    "styles": {
+      "fontFamily": "Special Elite",
+      "fontWeight": 400,
+      "fontSize": 32,
+      "marginTop": 4
+    }
+  },
+  {
+    "id": "zen_tokyo_zoo-car_battery",
+    "iconName": "CarBattery",
+    "styles": {
+      "fontFamily": "Zen Tokyo Zoo",
+      "fontWeight": 400,
+      "fontSize": 42,
+      "marginTop": -12
+    }
+  },
+  {
+    "id": "warnes-radio",
+    "iconName": "Radio",
+    "styles": {
+      "fontFamily": "Warnes",
+      "fontWeight": 400,
+      "fontSize": 24,
+      "marginTop": 4
+    }
+  },
+  {
+    "id": "rubik_moonrocks-balloon",
+    "iconName": "Balloon",
+    "styles": {
+      "fontFamily": "Rubik Moonrocks",
+      "fontWeight": 400,
+      "fontSize": 30
+    }
+  },
+  {
+    "id": "rampart_one-beach_ball",
+    "iconName": "BeachBall",
+    "styles": {
+      "fontFamily": "Rampart One",
+      "fontWeight": 400,
+      "fontSize": 30
+    }
+  },
+  {
+    "id": "gorditas-planet",
+    "iconName": "Planet",
+    "styles": {
+      "fontFamily": "Gorditas",
+      "fontWeight": 700,
+      "fontSize": 30
+    }
+  },
+  {
+    "id": "revalia-flask",
+    "iconName": "Flask",
+    "styles": {
+      "fontFamily": "Revalia",
+      "fontWeight": 400,
+      "fontSize": 28
+    }
+  },
+  {
+    "id": "pacifico-airplane_takeoff",
+    "iconName": "AirplaneTakeoff",
+    "styles": {
+      "fontFamily": "Pacifico",
+      "fontWeight": 400,
+      "fontSize": 36
+    }
+  },
+  {
+    "id": "bubblegum-sans-bomb",
+    "iconName": "Bomb",
+    "styles": {
+      "fontFamily": "Bubblegum Sans",
+      "fontWeight": 400,
+      "fontSize": 38,
+      "marginTop": 6
+    }
+  },
+  {
+    "id": "give_you_glory-bowl_steam",
+    "iconName": "BowlSteam",
+    "styles": {
+      "fontFamily": "Give You Glory",
+      "fontWeight": 400,
+      "fontSize": 34,
+      "marginTop": 8
+    }
+  }
+]

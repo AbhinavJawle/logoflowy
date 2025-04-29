@@ -33,7 +33,6 @@ const Logotype = React.memo(
           />
         ) : (
           <Icon
-            weight={customization.iconStyle}
             size={customization.iconSize}
             color={customization.color}
             className="leading-none"

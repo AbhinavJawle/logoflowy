@@ -17,11 +17,9 @@ export function useLogoUtilities() {
   const buildCustomization = (logo: Logo): Customization => {
     return {
       name: name || "dummylogo",
-      layout: layoutItems[layout] as Layout,
-      iconName: iconName || logo.iconName,
+      layout: layout, // Use the layout directly from the store
       styles: styles || logo.styles,
       color,
-      iconStyle,
       bgColor,
       iconSize,
     };

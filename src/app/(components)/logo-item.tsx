@@ -23,9 +23,7 @@ import { BASE_URL } from "@/lib/config";
 
 type LogoItemProps = {
   isFontSelected: boolean;
-  isIconSelected: boolean;
   onSetFont: () => void;
-  onSetIcon: () => void;
   onLogoDownload: () => void;
 } & Logo &
   React.HTMLAttributes<HTMLDivElement>;
@@ -36,16 +34,13 @@ const LogoItem: React.FC<LogoItemProps> = React.memo(
     iconName,
     styles,
     svgContent,
-    // isFontSelected = false,
-    // isIconSelected = false,
-    // onSetFont,
-    // onSetIcon,
+    onSetFont,
     onLogoDownload,
     children,
   }) => {
     const { copyToClipboard } = useCopyToClipboard();
     return (
-      <div className="h-96 flex flex-col relative border-b sm:border sm:-mr-[1px] sm:-mb-[1px] text-muted-foreground hover:text-foreground">
+      <div className="h-96 w-96 flex flex-col relative border-b sm:border sm:-mr-[1px] sm:-mb-[1px] text-muted-foreground hover:text-foreground">
         <div className="h-16 flex items-center px-4 gap-x-1 border-b border-dotted">
           {/*  <TooltipProvider>
             <Tooltip>
@@ -67,29 +62,6 @@ const LogoItem: React.FC<LogoItemProps> = React.memo(
               </TooltipTrigger>
               <TooltipContent>
                 <p>Set global font</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant={isIconSelected ? "secondary" : "ghost"}
-                  size="sm"
-                  onClick={onSetIcon}
-                  title={`Set ${iconName} as global icon to your logo`}
-                >
-                  {svgContent ? (
-                    <span className="mr-1">SVG</span>
-                  ) : (
-                    <PhosphorLogo weight="fill" />
-                  )}
-                  {svgContent ? 'AI Logo' : iconName}
-                  {isIconSelected ? <CheckSquare weight="fill" /> : <Square />}
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Set global icon</p>
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>*/}

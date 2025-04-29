@@ -7,6 +7,7 @@ import type { Customization, Logo } from "@/app/(types)/logo";
 import { renderToString } from "react-dom/server";
 import * as icons from "@/app/(utils)/icons";
 import Image from "next/image";
+import { layoutItems } from "@/app/(utils)/layout-items";
 
 // Function to resize SVG content to match the icon size
 const resizeSvg = (svgContent: string, size: number): string => {
@@ -52,7 +53,6 @@ export const LogoListGroup = ({ items, companyName }: { items: Logo[], companyNa
   const { initCustomization, buildCustomization, downloadLogo } =
     useLogoUtilities();
 
-  const setIconName = useLogoStore((state) => state.setIconName);
   const setStyles = useLogoStore((state) => state.setStyles);
 
   const handleSetFont = (
@@ -64,16 +64,6 @@ export const LogoListGroup = ({ items, companyName }: { items: Logo[], companyNa
       return;
     }
     setStyles(styles);
-    setIconName();
-  };
-
-  const handleSetIcon = (isIconSelected: boolean, iconName: string) => {
-    if (isIconSelected) {
-      setIconName();
-      return;
-    }
-    setIconName(iconName);
-    setStyles();
   };
 
   const handleDownloadLogo = async (
@@ -89,7 +79,6 @@ export const LogoListGroup = ({ items, companyName }: { items: Logo[], companyNa
       // Fall back to Phosphor icon if no SVG content
       svgIcon = renderToString(
         <Icon
-          weight={customization.iconStyle}
           color={customization.color}
           size={customization.iconSize}
         />
@@ -98,8 +87,13 @@ export const LogoListGroup = ({ items, companyName }: { items: Logo[], companyNa
     await downloadLogo(customization, svgIcon, filename);
   };
 
+  // Determine container classes based on item count
+  const containerClasses = items.length === 1 
+    ? "-mt-[1px]" // No grid for single item, just margin if needed
+    : "grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5 -mt-[1px]"; // Grid for multiple items
+
   return (
-    <div className="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5 -mt-[1px]">
+    <div className={containerClasses}>
       {items.map((item: Logo) => {
         const customization = buildCustomization(item);
         // Pass SVG content from item to customization if available
@@ -108,15 +102,12 @@ export const LogoListGroup = ({ items, companyName }: { items: Logo[], companyNa
         }
         const isFontSelected =
           initCustomization.styles?.fontFamily === item.styles.fontFamily;
-        const isIconSelected = initCustomization.iconName === item.iconName;
-        const Icon = icons[customization.iconName as keyof typeof icons];
+        const Icon = icons[item.iconName as keyof typeof icons];
         return (
           <LogoItem
             key={item.id}
             isFontSelected={isFontSelected}
-            isIconSelected={isIconSelected}
             onSetFont={() => handleSetFont(isFontSelected, item.styles)}
-            onSetIcon={() => handleSetIcon(isIconSelected, item.iconName)}
             onLogoDownload={() =>
               handleDownloadLogo(customization, Icon, item.id)
             }
@@ -125,7 +116,7 @@ export const LogoListGroup = ({ items, companyName }: { items: Logo[], companyNa
             <LogotypeBox bgColor={customization.bgColor}>
               {item.imageUrl ? (
                 <div className="flex items-center justify-center h-full w-full">
-                  <div className="flex flex-col items-center gap-y-0">
+                  <div className={`flex items-center gap-y-0 ${layoutItems[customization.layout]}`}>
                     <div
                       className="relative"
                       style={{
@@ -159,7 +150,7 @@ export const LogoListGroup = ({ items, companyName }: { items: Logo[], companyNa
                         lineHeight: "1",
                       }}
                     >
-                      {companyName || customization.name}
+                      {companyName || customization.name || "dummylogo"}
                     </p>
                   </div>
                 </div>
