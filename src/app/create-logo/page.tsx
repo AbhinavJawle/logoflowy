@@ -205,17 +205,17 @@ function CreateLogo() {
                 Download Logo
               </Button>
             </div>
+
+            <link rel="stylesheet" href={googleFontUrl} />
+            <Navbar />
+            {/* Wrap LogoListGroup in a centering container */}
+            <div className="flex justify-center items-start pt-10">
+              <LogoListGroup items={data} companyName={formData?.logoTitle} />
+            </div>
           </>
         )
       )}
       {/* AI-generated logo display */}
-
-      <link rel="stylesheet" href={googleFontUrl} />
-      <Navbar />
-      {/* Wrap LogoListGroup in a centering container */}
-      <div className="flex justify-center items-start pt-10">
-        <LogoListGroup items={data} companyName={formData?.logoTitle} />
-      </div>
     </div>
   );
 }
