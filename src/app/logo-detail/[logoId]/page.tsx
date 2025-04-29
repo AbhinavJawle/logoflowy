@@ -47,20 +47,18 @@ function LogoDetailPage() {
           const fetchedData = docSnap.data() as FetchedLogoData;
 
           // Use the structure from logos.json[0] as a base
-          const baseLogo = { ...allLogos[0] }; 
-          
+          const baseLogo = { ...allLogos[0] };
+
           // Create the single Logo object for LogoListGroup
           const preparedLogo: Logo = {
             ...baseLogo, // Spread base properties (styles, iconName etc.)
             id: logoId, // Use the actual logoId
-            name: fetchedData.title || "Logo", // Use fetched title
             imageUrl: fetchedData.image, // Use fetched image URL
             // We might not have SVG content from this Firestore fetch
-            svgContent: undefined, 
+            svgContent: undefined,
             // Add description if needed by LogoItem/Logotype, or handle separately
           };
           setLogoItem(preparedLogo);
-
         } else {
           setError("Logo not found.");
           setLogoItem(null);
@@ -78,7 +76,7 @@ function LogoDetailPage() {
   }, [logoId, userDetail]);
 
   // Generate Google Font URL based on the *single* logo item if it exists
-  // Note: This might need adjustment if you want the font selector 
+  // Note: This might need adjustment if you want the font selector
   // in Navbar to dynamically change this based on its own state.
   // For now, it uses the font from the base structure (logos.json[0])
   const googleFontUrl = logoItem ? generateGoogleFont([logoItem]) : "";
@@ -109,14 +107,17 @@ function LogoDetailPage() {
 
   // Render Navbar and LogoListGroup with the single prepared logo item
   return (
-    <div> 
+    <div>
       {googleFontUrl && <link rel="stylesheet" href={googleFontUrl} />}
       <Navbar />
       {/* Wrap LogoListGroup in a centering container */}
-      <div className="flex justify-center items-start pt-10"> 
+      <div className="flex justify-center items-start pt-10">
         {/* Pass the single logo item in an array */}
-        <LogoListGroup items={[logoItem]} companyName={logoItem.name} />
-      </div> 
+        <LogoListGroup
+          items={[logoItem]}
+          companyName={logoItem.customization?.name || "dummylogo"}
+        />
+      </div>
     </div>
   );
 }

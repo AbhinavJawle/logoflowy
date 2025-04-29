@@ -9,9 +9,9 @@ export function useLogoUtilities() {
   const color = useLogoStore((state) => state.color);
   const bgColor = useLogoStore((state) => state.bgColor);
   const layout = useLogoStore((state) => state.layout);
-  const iconStyle = useLogoStore((state) => state.iconStyle);
+  // const iconStyle = useLogoStore((state) => state.iconStyle);
   const iconSize = useLogoStore((state) => state.iconSize);
-  const iconName = useLogoStore((state) => state.iconName);
+  // const iconName = useLogoStore((state) => state.iconName);
   const styles = useLogoStore((state) => state.styles);
 
   const buildCustomization = (logo: Logo): Customization => {
@@ -36,7 +36,7 @@ export function useLogoUtilities() {
 
   return {
     initCustomization: {
-      iconName,
+      iconName: undefined,
       styles,
     },
     downloadLogo,
