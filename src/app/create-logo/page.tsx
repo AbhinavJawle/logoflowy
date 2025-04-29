@@ -12,10 +12,19 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Loader2, LayoutDashboard } from "lucide-react";
 import { toast } from "sonner";
-import { redirect } from "next/dist/server/api-utils";
 import { renderToString } from "react-dom/server";
 
+import type { Metadata } from "next";
+import type { Logo } from "@/app/(types)/logo";
+import { LogoListGroup } from "../(components)/logo-list-group";
+import { generateGoogleFont } from "@/app/(utils)/generate-google-font";
+import { BASE_URL } from "@/lib/config";
+import allLogos from "@/app/(data)/logos.json";
+
 function CreateLogo() {
+  const [data, setData] = useState<Logo[]>(() => allLogos);
+  const googleFontUrl = generateGoogleFont(data);
+
   const { userDetail, setUserDetail } = useContext(UserDetailContext);
   const [formData, setFormData] = useState<FormData>();
   const [loading, setLoading] = useState(false);
@@ -69,8 +78,16 @@ function CreateLogo() {
       userCredits: userDetail?.credits,
     });
 
-    console.log("image url", result.data.image);
-    setLogoImage(result.data.image);
+    console.log("SVG data received:", result.data.svgIcon ? "Yes" : "No");
+    console.log("SVG content sample:", result.data.svgIcon ? result.data.svgIcon.substring(0, 100) + "..." : "None");
+    
+    // If we have SVG data, use it, otherwise fall back to image URL if present
+    if (result.data.svgIcon) {
+      setSvgIcon(result.data.svgIcon);
+      setLogoImage(result.data.image); // Still set the image for preview
+    } else if (result.data.image) {
+      setLogoImage(result.data.image);
+    }
     if (userDetail?.email && userDetail?.name) {
       try {
         const res = await fetch("/api/users", {
@@ -100,12 +117,26 @@ function CreateLogo() {
         viewBox="0 0 256 256"
         {...props}
       >
-        <image href={logoImage} width="100%" height="100%" />
+        {logoImage ? (
+          <image href={logoImage} width="100%" height="100%" />
+        ) : null}
       </svg>
     );
 
-    const svgIcon = renderToString(<SVGComponent />);
-    setSvgIcon(svgIcon);
+    // Update all logos in the data to include the image URL
+    if (result.data.image) {
+      console.log('Using image URL for logos');
+      
+      setData(prevData => {
+        // Create a deep copy of the data
+        const newData = [...prevData];
+        // Add image URL to all logos
+        return newData.map(logo => ({
+          ...logo,
+          imageUrl: result.data.image
+        }));
+      });
+    }
   };
 
   const handleDownload = async () => {
@@ -169,6 +200,9 @@ function CreateLogo() {
           </>
         )
       )}
+      {/* AI-generated logo display */}
+      <link rel="stylesheet" href={googleFontUrl} />
+      <LogoListGroup items={data} companyName={formData?.logoTitle} />
     </div>
   );
 }

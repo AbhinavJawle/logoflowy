@@ -35,10 +35,11 @@ const LogoItem: React.FC<LogoItemProps> = React.memo(
     id,
     iconName,
     styles,
-    isFontSelected = false,
-    isIconSelected = false,
-    onSetFont,
-    onSetIcon,
+    svgContent,
+    // isFontSelected = false,
+    // isIconSelected = false,
+    // onSetFont,
+    // onSetIcon,
     onLogoDownload,
     children,
   }) => {
@@ -46,7 +47,7 @@ const LogoItem: React.FC<LogoItemProps> = React.memo(
     return (
       <div className="h-96 flex flex-col relative border-b sm:border sm:-mr-[1px] sm:-mb-[1px] text-muted-foreground hover:text-foreground">
         <div className="h-16 flex items-center px-4 gap-x-1 border-b border-dotted">
-          <TooltipProvider>
+          {/*  <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button
@@ -78,8 +79,12 @@ const LogoItem: React.FC<LogoItemProps> = React.memo(
                   onClick={onSetIcon}
                   title={`Set ${iconName} as global icon to your logo`}
                 >
-                  <PhosphorLogo weight="fill" />
-                  {iconName}
+                  {svgContent ? (
+                    <span className="mr-1">SVG</span>
+                  ) : (
+                    <PhosphorLogo weight="fill" />
+                  )}
+                  {svgContent ? 'AI Logo' : iconName}
                   {isIconSelected ? <CheckSquare weight="fill" /> : <Square />}
                 </Button>
               </TooltipTrigger>
@@ -87,7 +92,7 @@ const LogoItem: React.FC<LogoItemProps> = React.memo(
                 <p>Set global icon</p>
               </TooltipContent>
             </Tooltip>
-          </TooltipProvider>
+          </TooltipProvider>*/}
         </div>
         <div className="flex-grow p-6">{children}</div>
         <div className="h-16 flex items-center px-4 text-xs justify-between border-t border-dotted">

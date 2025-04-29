@@ -43,16 +43,11 @@ export async function POST(req: NextRequest) {
       }
     );
 
-    console.log("Response", response);
-    console.log("Response0", response[0]);
-
-    console.log("URL011", response[0].url());
-
     console.log("URL011", response[0].url().href); //=> "http://example.com"
-    //=> "http://example.com"
 
     const imageAIUrl = response[0].url().href;
     let cleanedImageUrl = imageAIUrl;
+    let svgIcon: any;
     try {
       const uploadResult = await cloudinary.uploader.upload(imageAIUrl, {
         transformation: [
@@ -62,6 +57,8 @@ export async function POST(req: NextRequest) {
         format: "svg",
       });
       cleanedImageUrl = uploadResult.secure_url;
+      svgIcon = await axios.get(`${cleanedImageUrl}`);
+      console.log("SVG Icon", svgIcon.data);
       console.log("cleanedImageUrl", cleanedImageUrl);
     } catch (err) {
       console.error("Cloudinary background removal error:", err);
@@ -85,7 +82,7 @@ export async function POST(req: NextRequest) {
     }
     // return NextResponse.json(AiPrompt);
     // return NextResponse.json(response);
-    return NextResponse.json({ image: cleanedImageUrl });
+    return NextResponse.json({ image: cleanedImageUrl, svgIcon: svgIcon.data });
   } catch (error) {
     console.log(error);
     let errorMessage = "Unknown error";

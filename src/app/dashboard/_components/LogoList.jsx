@@ -62,15 +62,22 @@ function LogoList() {
               <div
                 key={index}
                 className="flex flex-col items-center justify-center bg-white border border-gray-200 rounded-lg transition-all hover:scale-105 p-2 cursor-pointer"
-                onClick={() => ViewLogo(logo?.image)}
+                onClick={() => ViewLogo(logo?.svg || logo?.image)}
               >
-                <Image
-                  src={logo?.image}
-                  alt={"LogoImage"}
-                  height={224}
-                  width={224}
-                  className="rounded-md object-cover w-56 h-56"
-                />
+                {logo?.svg ? (
+                  <div 
+                    dangerouslySetInnerHTML={{ __html: logo.svg }}
+                    className="rounded-md w-56 h-56 flex items-center justify-center"
+                  />
+                ) : (
+                  <Image
+                    src={logo?.image}
+                    alt={"LogoImage"}
+                    height={224}
+                    width={224}
+                    className="rounded-md object-cover w-56 h-56"
+                  />
+                )}
                 <h2 className="mt-2 text-base font-medium text-gray-700 truncate w-40 text-center">
                   {logo?.title}
                 </h2>
@@ -98,13 +105,20 @@ function LogoList() {
             className="relative bg-white/80 border border-gray-200 rounded-2xl shadow-2xl p-10 flex flex-col items-center max-w-[96vw] max-h-[98vh] backdrop-blur-xl"
             style={{ boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.2)" }}
           >
-            <Image
-              src={modalImage?.image || modalImage}
-              alt={modalImage?.title || "Logo Preview"}
-              width={360}
-              height={360}
-              className="rounded-xl object-contain max-h-[70vh] max-w-full mb-4"
-            />
+            {typeof modalImage === 'string' && modalImage.startsWith('<svg') ? (
+              <div 
+                dangerouslySetInnerHTML={{ __html: modalImage }}
+                className="rounded-xl max-h-[70vh] max-w-full mb-4 w-[360px] h-[360px] flex items-center justify-center"
+              />
+            ) : (
+              <Image
+                src={modalImage?.image || modalImage}
+                alt={modalImage?.title || "Logo Preview"}
+                width={360}
+                height={360}
+                className="rounded-xl object-contain max-h-[70vh] max-w-full mb-4"
+              />
+            )}
             <h2 className="text-2xl font-bold text-gray-900 text-center w-full truncate mb-1">
               Logo Preview
             </h2>

@@ -6,6 +6,8 @@ export interface Logo {
   iconName: string;
   styles: React.CSSProperties;
   customization?: Customization;
+  svgContent?: string; // Added to store SVG content
+  imageUrl?: string; // Added to store image URL
 }
 
 export interface Customization {
@@ -17,4 +19,5 @@ export interface Customization {
   iconName?: string;
   iconSize?: number;
   styles?: React.CSSProperties;
+  svgContent?: string; // Added to store SVG content
 }
