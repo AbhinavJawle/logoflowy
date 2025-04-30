@@ -18,7 +18,7 @@ export const TextColorPicker = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost">
-          Logo Color
+          Text Color
           <span
             className="w-3 h-3 rounded-full border border-muted-foreground"
             style={{ backgroundColor: color }}

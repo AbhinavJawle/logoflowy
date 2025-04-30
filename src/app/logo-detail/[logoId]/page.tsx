@@ -17,7 +17,8 @@ import type { Logo } from "@/app/(types)/logo"; // Added
 interface FetchedLogoData {
   image: string;
   title: string;
-  desc?: string; // Optional description
+  desc?: string;
+  svgIcon?: string;
 }
 
 function LogoDetailPage() {
@@ -53,7 +54,7 @@ function LogoDetailPage() {
             ...baseLogo, // Spread base properties (styles, iconName etc.)
             id: logoId, // Use the actual logoId
             imageUrl: fetchedData.image, // Use fetched image URL
-            svgContent: undefined,
+            svgContent: fetchedData.svgIcon, // Use fetched image URL,
             companyName: fetchedData.title, // Use fetched title
           };
           console.log("Prepared logo:", preparedLogo);

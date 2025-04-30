@@ -73,20 +73,21 @@ export const LogoListGroup = ({
   };
 
   const handleDownloadLogo = async (
-    customization: Customization,
-    Icon: React.ComponentType<any>,
+    customization: Customization, // This customization already has the correct name and svgContent
+    // Icon: React.ComponentType<any>, // No longer needed here
     filename: string
   ) => {
-    let svgIcon;
-    if (customization.svgContent) {
-      // Use the SVG content directly if available
-      svgIcon = customization.svgContent;
-    } else {
-      // Fall back to Phosphor icon if no SVG content
-      svgIcon = renderToString(
-        <Icon color={customization.color} size={customization.iconSize} />
-      );
+    // Ensure svgIcon uses the content from the customization object
+    const svgIcon = customization.svgContent;
+
+    if (!svgIcon) {
+      console.error("SVG content is missing in customization for download.");
+      // Optionally, handle the fallback or show an error
+      // For now, we'll prevent download if SVG is missing
+      return;
     }
+
+    console.log("Using SVG Content for download:", svgIcon);
     await downloadLogo(customization, svgIcon, filename);
   };
 
@@ -99,22 +100,24 @@ export const LogoListGroup = ({
   return (
     <div className={containerClasses}>
       {items.map((item: Logo) => {
-        const customization = buildCustomization(item);
-        // Pass SVG content from item to customization if available
-        if (item.svgContent) {
-          customization.svgContent = item.svgContent;
-        }
+        // Build customization using the specific item's companyName and svgContent
+        const customization = buildCustomization(
+          item,
+          companyName, // Pass the companyName prop from LogoListGroup
+          item.svgContent
+        );
+
         const isFontSelected =
           initCustomization.styles?.fontFamily === item.styles.fontFamily;
+        // Get the fallback Icon component (still needed for display if imageUrl is missing)
         const Icon = icons[item.iconName as keyof typeof icons];
         return (
           <LogoItem
             key={item.id}
             isFontSelected={isFontSelected}
             onSetFont={() => handleSetFont(isFontSelected, item.styles)}
-            onLogoDownload={() =>
-              handleDownloadLogo(customization, Icon, item.id)
-            }
+            // Pass the correctly built customization object to handleDownloadLogo
+            onLogoDownload={() => handleDownloadLogo(customization, item.id)}
             {...item}
           >
             <LogotypeBox bgColor={customization.bgColor}>

@@ -16,9 +16,18 @@ export function useLogoUtilities() {
   const styles = useLogoStore((state) => state.styles);
   const gap = useLogoStore((state) => state.gap || 0);
 
-  const buildCustomization = (logo: Logo): Customization => {
+  const buildCustomization = (
+    logo: Logo,
+    companyName?: string,
+    svgContent?: string
+  ): Customization => {
+    // Prioritize passed companyName, then logo.companyName, then Zustand name, then default
+    const finalName = companyName || logo.companyName || name || "dummylogo";
+    // Prioritize passed svgContent, then logo.svgContent
+    const finalSvgContent = svgContent || logo.svgContent;
+
     return {
-      name: name || "dummylogo",
+      name: finalName,
       layout: layout,
       styles: styles || logo.styles,
       color,
@@ -26,6 +35,7 @@ export function useLogoUtilities() {
       iconSize,
       fontSize,
       gap,
+      svgContent: finalSvgContent, // Include the determined SVG content
     };
   };
 

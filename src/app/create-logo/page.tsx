@@ -81,12 +81,6 @@ function CreateLogo() {
     console.log("aiPROMPT", result.data.aiprompt);
 
     console.log("SVG data received:", result.data.svgIcon ? "Yes" : "No");
-    console.log(
-      "SVG content sample:",
-      result.data.svgIcon
-        ? result.data.svgIcon.substring(0, 100) + "..."
-        : "None"
-    );
 
     // If we have SVG data, use it, otherwise fall back to image URL if present
     if (result.data.svgIcon) {
@@ -130,17 +124,18 @@ function CreateLogo() {
       </svg>
     );
 
-    // Update all logos in the data to include the image URL
-    if (result.data.image) {
-      console.log("Using image URL for logos");
+    // Update all logos in the data to include the image URL and SVG content
+    if (result.data.image || result.data.svgIcon) {
+      console.log("Updating logos with generated content");
 
       setData((prevData) => {
         // Create a deep copy of the data
         const newData = [...prevData];
-        // Add image URL to all logos
+        // Add image URL and SVG content to all logos
         return newData.map((logo) => ({
           ...logo,
-          imageUrl: result.data.image,
+          imageUrl: result.data.image || logo.imageUrl, // Keep existing image if new one isn't provided
+          svgContent: result.data.svgIcon || logo.svgContent, // Keep existing SVG if new one isn't provided
         }));
       });
     }

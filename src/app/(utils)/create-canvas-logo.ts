@@ -23,46 +23,45 @@ export async function createCanvasLogo({
   const icon = await buildIcon(svgIcon, iconSize);
   const canvas = new StaticCanvas("canvas");
 
+  // Calculate canvas dimensions based on layout and elements
+  let canvasWidth, canvasHeight;
   if (layout === "left" || layout === "right") {
-    // Use gap for horizontal layouts
-    canvas.width = iconSize + text.width + gap;
-    canvas.height = Math.max(iconSize, text.height); // Adjust height based on taller element
-    canvas.centerObjectV(icon);
-    canvas.centerObjectV(text);
+    canvasWidth = icon.width + text.width + gap;
+    canvasHeight = Math.max(icon.height, text.height);
   } else {
-    // Use gap for vertical layouts
-    canvas.width = Math.max(iconSize, text.width); // Adjust width based on wider element
-    canvas.height = iconSize + text.height + gap;
-    canvas.centerObjectH(icon);
-    canvas.centerObjectH(text);
+    // top or bottom
+    canvasWidth = Math.max(icon.width, text.width);
+    canvasHeight = icon.height + text.height + gap;
   }
 
-  if (layout === layoutItems.top) {
+  canvas.setDimensions({ width: canvasWidth, height: canvasHeight });
+
+  // Position elements based on layout
+  if (layout === "top") {
+    icon.left = (canvasWidth - icon.width) / 2; // Center icon horizontally
     icon.top = 0;
-    text.top = iconSize + gap;
-  }
-
-  if (layout === layoutItems.right) {
-    text.left = 0;
-    icon.left = text.width + gap;
-  }
-
-  if (layout === layoutItems.bottom) {
+    text.left = (canvasWidth - text.width) / 2; // Center text horizontally
+    text.top = icon.height + gap;
+  } else if (layout === "bottom") {
+    text.left = (canvasWidth - text.width) / 2; // Center text horizontally
     text.top = 0;
+    icon.left = (canvasWidth - icon.width) / 2; // Center icon horizontally
     icon.top = text.height + gap;
-  }
-
-  if (layout === layoutItems.left) {
+  } else if (layout === "left") {
     icon.left = 0;
-    text.left = iconSize + gap;
+    icon.top = (canvasHeight - icon.height) / 2; // Center icon vertically
+    text.left = icon.width + gap;
+    text.top = (canvasHeight - text.height) / 2; // Center text vertically
+  } else {
+    // right
+    text.left = 0;
+    text.top = (canvasHeight - text.height) / 2; // Center text vertically
+    icon.left = text.width + gap;
+    icon.top = (canvasHeight - icon.height) / 2; // Center icon vertically
   }
 
-  const group = new Group([text, icon]);
-
-  // Center the group on the canvas
-  canvas.centerObject(group);
-
-  canvas.add(group);
+  // Add elements directly to canvas (no group needed for simple positioning)
+  canvas.add(icon, text);
   canvas.renderAll();
 
   return canvas.toDataURL({ multiplier });

@@ -5,7 +5,7 @@ import { Slider } from "@/components/ui/slider";
 import { Label } from "@/components/ui/label";
 
 const MIN_ICON_SIZE = 16;
-const MAX_ICON_SIZE = 72;
+const MAX_ICON_SIZE = 100;
 const STEP = 2;
 
 export const IconSizeSlider = () => {

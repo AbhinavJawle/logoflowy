@@ -38,9 +38,12 @@ export async function POST(req: NextRequest) {
 
     // "recraft-ai/recraft-20b-svg",
 
-    const response: any = await replicate.run("black-forest-labs/flux-schnell", {
-      input,
-    });
+    const response: any = await replicate.run(
+      "black-forest-labs/flux-schnell",
+      {
+        input,
+      }
+    );
 
     console.log("URL011", response[0].url().href); //=> "http://example.com"
 
@@ -68,9 +71,13 @@ export async function POST(req: NextRequest) {
       const docRef = doc(db, "users", email);
 
       await setDoc(doc(db, "users", email, "logos", Date.now().toString()), {
-        image: cleanedImageUrl,
         title: title,
         desc: desc,
+        aiprompt: AiPromptResult.text,
+        createdAt: Date.now(),
+        image: cleanedImageUrl,
+        svgIcon: svgIcon.data,
+        pngImage: imageAIUrl,
       });
 
       await updateDoc(docRef, {
