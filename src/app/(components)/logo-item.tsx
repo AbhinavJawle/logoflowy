@@ -24,7 +24,7 @@ import { BASE_URL } from "@/lib/config";
 type LogoItemProps = {
   isFontSelected: boolean;
   onSetFont: () => void;
-  onLogoDownload: () => void;
+  onLogoDownload: (format: "png" | "svg") => void; // Accept format
 } & Logo &
   React.HTMLAttributes<HTMLDivElement>;
 
@@ -40,15 +40,23 @@ const LogoItem: React.FC<LogoItemProps> = React.memo(
   }) => {
     const { copyToClipboard } = useCopyToClipboard();
     return (
-      <div className="h-96 w-200 flex flex-col relative text-muted-foreground hover:text-foreground bg-transparent shadow-2xl rounded-xl transition-all duration-200">
+      <div className="h-96 w-200 flex flex-row relative text-muted-foreground hover:text-foreground bg-transparent shadow-2xl rounded-xl transition-all duration-200">
         <div className="flex-grow p-2 flex items-center justify-center">
           {children}
           <Button
             variant="ghost"
-            onClick={onLogoDownload}
-            title={`Download your custom dummylogo created with ${iconName} + ${styles.fontFamily}`}
+            onClick={() => onLogoDownload("png")} // Pass 'png'
+            title={`Download PNG of your custom logo created with ${iconName} + ${styles.fontFamily}`}
           >
-            Download
+            Download Png
+          </Button>
+
+          <Button
+            variant="ghost"
+            onClick={() => onLogoDownload("svg")} // Pass 'svg'
+            title={`Download SVG of your custom logo created with ${iconName} + ${styles.fontFamily}`}
+          >
+            Download Svg
           </Button>
         </div>
       </div>

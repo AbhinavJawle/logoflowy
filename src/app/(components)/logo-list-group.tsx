@@ -74,8 +74,8 @@ export const LogoListGroup = ({
 
   const handleDownloadLogo = async (
     customization: Customization, // This customization already has the correct name and svgContent
-    // Icon: React.ComponentType<any>, // No longer needed here
-    filename: string
+    filename: string,
+    format: "png" | "svg" // Add format parameter
   ) => {
     // Ensure svgIcon uses the content from the customization object
     const svgIcon = customization.svgContent;
@@ -87,8 +87,8 @@ export const LogoListGroup = ({
       return;
     }
 
-    console.log("Using SVG Content for download:", svgIcon);
-    await downloadLogo(customization, svgIcon, filename);
+    console.log(`Using SVG Content for ${format} download:`, svgIcon);
+    await downloadLogo(customization, svgIcon, filename, format); // Pass format here
   };
 
   // Determine container classes based on item count
@@ -116,8 +116,10 @@ export const LogoListGroup = ({
             key={item.id}
             isFontSelected={isFontSelected}
             onSetFont={() => handleSetFont(isFontSelected, item.styles)}
-            // Pass the correctly built customization object to handleDownloadLogo
-            onLogoDownload={() => handleDownloadLogo(customization, item.id)}
+            // Pass the correctly built customization object and format to handleDownloadLogo
+            onLogoDownload={(format) =>
+              handleDownloadLogo(customization, item.id, format)
+            }
             {...item}
           >
             <LogotypeBox bgColor={customization.bgColor}>

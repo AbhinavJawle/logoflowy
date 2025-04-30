@@ -9,7 +9,7 @@ import {
 import { Customization } from "@/app/(types)/logo";
 import { layoutItems } from "@/app/(utils)/layout-items";
 
-export async function createCanvasLogo({
+export async function createCanvas({
   customization,
   svgIcon,
 }: {
@@ -64,7 +64,23 @@ export async function createCanvasLogo({
   canvas.add(icon, text);
   canvas.renderAll();
 
-  return canvas.toDataURL({ multiplier });
+  return canvas;
+}
+
+// New function to get canvas data in specified format
+export async function getCanvasData(
+  canvas: StaticCanvas,
+  format: "png" | "svg",
+  multiplier: number = 3
+): Promise<string> {
+  if (format === "png") {
+    return canvas.toDataURL({ multiplier });
+  } else {
+    // Ensure fonts are embedded for SVG export if possible
+    // Note: Fabric's default toSVG might not embed fonts perfectly depending on setup.
+    // Additional logic might be needed for robust font embedding.
+    return canvas.toSVG();
+  }
 }
 
 async function buildIcon(svgIcon: string, iconSize: number) {

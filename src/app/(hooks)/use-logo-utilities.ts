@@ -1,8 +1,8 @@
 import { layoutItems } from "@/app/(utils)/layout-items";
 import { useLogoStore } from "@/app/(hooks)/use-logo-store";
 import type { Customization, Layout, Logo } from "@/app/(types)/logo";
-import { downloadImage } from "@/lib/download-image";
-import { createCanvasLogo } from "@/app/(utils)/create-canvas-logo";
+import { downloadImage, downloadSvg } from "@/lib/download-image";
+import { createCanvas, getCanvasData } from "@/app/(utils)/create-canvas-logo";
 
 export function useLogoUtilities() {
   const name = useLogoStore((state) => state.name);
@@ -42,10 +42,17 @@ export function useLogoUtilities() {
   const downloadLogo = async (
     customization: Customization,
     svgIcon: string,
-    filename?: string
+    filename?: string,
+    format: "png" | "svg" = "png" // Default to png
   ) => {
-    const canvasUrl = await createCanvasLogo({ customization, svgIcon });
-    downloadImage(canvasUrl, filename);
+    const canvas = await createCanvas({ customization, svgIcon });
+    const data = await getCanvasData(canvas, format);
+
+    if (format === "png") {
+      downloadImage(data, filename);
+    } else {
+      downloadSvg(data, filename);
+    }
   };
 
   return {
@@ -53,7 +60,7 @@ export function useLogoUtilities() {
       iconName: undefined,
       styles,
     },
-    downloadLogo,
+    downloadLogo, // This function now handles both PNG and SVG
     buildCustomization,
   };
 }
