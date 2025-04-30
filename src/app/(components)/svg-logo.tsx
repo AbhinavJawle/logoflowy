@@ -13,46 +13,37 @@ interface SVGLogoProps {
 export const SVGLogo: React.FC<SVGLogoProps> = React.memo(
   ({ svgContent, size = 24, color, className }) => {
     // Create a simple SVG placeholder if no content
-    const fallbackSvg = `<svg width="${size}px" height="${size}px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" fill="${color || 'currentColor'}"/></svg>`;
-    
-    // Process the SVG content to ensure it has the right size
+    const fallbackSvg = `<svg width="${size}px" height="${size}px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" fill="${
+      color || "currentColor"
+    }"/></svg>`;
+
+    // Process the SVG content minimally to set size, preserving internal styles
     const processedSvg = React.useMemo(() => {
       if (!svgContent) return fallbackSvg;
-      
+
       try {
-        // Create a temporary DOM element to parse the SVG
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(svgContent, 'image/svg+xml');
-        const svgElement = doc.querySelector('svg');
-        
-        if (svgElement) {
-          // Set fixed width and height
-          svgElement.setAttribute('width', `${size}px`);
-          svgElement.setAttribute('height', `${size}px`);
-          
-          // Apply color if specified
-          if (color) {
-            // Try to set color on paths and other elements
-            const elements = svgElement.querySelectorAll('path, circle, rect, polygon');
-            elements.forEach(el => {
-              if (!el.getAttribute('fill') || el.getAttribute('fill') === 'none') {
-                el.setAttribute('fill', color);
-              }
-            });
-          }
-          
-          // Convert back to string
-          return new XMLSerializer().serializeToString(svgElement);
-        }
+        // Use regex to set width and height attributes on the root SVG tag
+        // This avoids parsing and reserializing, which might strip style tags
+        let updatedSvg = svgContent;
+        updatedSvg = updatedSvg.replace(/<svg[^>]*>/, (match) => {
+          let newAttrs = ` width="${size}px" height="${size}px" `;
+          // Remove existing width/height attributes if they exist
+          match = match.replace(/ width="[^ "]*"/, "");
+          match = match.replace(/ height="[^ "]*"/, "");
+          // Add new attributes just before the closing >
+          return match.slice(0, -1) + newAttrs + ">";
+        });
+
+        return updatedSvg;
       } catch (error) {
-        console.error('Error processing SVG:', error);
+        console.error("Error processing SVG for preview:", error);
       }
-      
-      return fallbackSvg;
-    }, [svgContent, size, color]);
+
+      return fallbackSvg; // Return fallback if processing fails
+    }, [svgContent, size]); // Removed color dependency as we are not applying it here
 
     return (
-      <div 
+      <div
         className={cn("inline-block", className)}
         style={{ width: `${size}px`, height: `${size}px` }}
         dangerouslySetInnerHTML={{ __html: processedSvg }}

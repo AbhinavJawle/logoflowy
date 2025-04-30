@@ -46,12 +46,16 @@ export function useLogoUtilities() {
     format: "png" | "svg" = "png" // Default to png
   ) => {
     const canvas = await createCanvas({ customization, svgIcon });
-    const data = await getCanvasData(canvas, format);
+    // Pass customization to getCanvasData for font embedding
+    const data = await getCanvasData(canvas, format, customization);
+    //my attempt
+    // const svgContent = canvas.toSVG();
 
     if (format === "png") {
       downloadImage(data, filename);
     } else {
       downloadSvg(data, filename);
+      // downloadSvg(svgContent, filename);
     }
   };
 

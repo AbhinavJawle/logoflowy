@@ -41,7 +41,7 @@ const LogoItem: React.FC<LogoItemProps> = React.memo(
     const { copyToClipboard } = useCopyToClipboard();
     return (
       <div className="h-96 w-200 flex flex-row relative text-muted-foreground hover:text-foreground bg-transparent shadow-2xl rounded-xl transition-all duration-200">
-        <div className="flex-grow p-2 flex items-center justify-center">
+        <div className="flex-grow p-2 flex-col items-center justify-center">
           {children}
           <Button
             variant="ghost"
