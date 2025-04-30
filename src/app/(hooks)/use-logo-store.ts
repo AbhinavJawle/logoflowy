@@ -9,6 +9,8 @@ const DEFAULT_LOGO_STORE = {
   bgColor: "#252626",
   layout: "left",
   iconSize: 40,
+  fontSize: 32, // Added default font size
+  gap: 10, // Added default gap
   styles: undefined,
 } as Customization;
 
@@ -17,6 +19,9 @@ interface LogoStore extends Customization {
   setLayout: (value: Layout) => void;
   setColor: (value: string) => void;
   setBgColor: (value: string) => void;
+  setIconSize: (value: number) => void; // Added icon size setter
+  setFontSize: (value: number) => void; // Added font size setter
+  setGap: (value: number) => void; // Added gap setter
   setStyles: (value?: React.CSSProperties) => void;
   reset: () => void;
 }
@@ -29,6 +34,9 @@ export const useLogoStore = create<LogoStore>()(
       setLayout: (layout) => set(() => ({ layout })),
       setColor: (color) => set(() => ({ color })),
       setBgColor: (bgColor) => set(() => ({ bgColor })),
+      setIconSize: (iconSize) => set(() => ({ iconSize })), // Added icon size setter logic
+      setFontSize: (fontSize) => set(() => ({ fontSize })), // Added font size setter logic
+      setGap: (gap) => set(() => ({ gap })), // Added gap setter logic
       setStyles: (styles) => set(() => ({ styles })),
       reset: () =>
         set(() => ({

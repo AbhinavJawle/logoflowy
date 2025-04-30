@@ -11,17 +11,21 @@ export function useLogoUtilities() {
   const layout = useLogoStore((state) => state.layout);
   // const iconStyle = useLogoStore((state) => state.iconStyle);
   const iconSize = useLogoStore((state) => state.iconSize);
+  const fontSize = useLogoStore((state) => state.fontSize); // Added
   // const iconName = useLogoStore((state) => state.iconName);
   const styles = useLogoStore((state) => state.styles);
+  const gap = useLogoStore((state) => state.gap || 0);
 
   const buildCustomization = (logo: Logo): Customization => {
     return {
       name: name || "dummylogo",
-      layout: layout, // Use the layout directly from the store
+      layout: layout,
       styles: styles || logo.styles,
       color,
       bgColor,
       iconSize,
+      fontSize,
+      gap,
     };
   };
 

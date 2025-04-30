@@ -16,44 +16,51 @@ export async function createCanvasLogo({
   customization: Customization;
   svgIcon: string;
 }) {
-  const gapH = 8;
-  const gapV = 8 / 2;
   const multiplier = 3; // scale
 
-  const { layout, iconSize = 0 } = customization;
+  const { layout, iconSize = 0, gap = 0, fontSize } = customization; // Get gap from customization, default to 10
   const text = buildText(customization);
   const icon = await buildIcon(svgIcon, iconSize);
   const canvas = new StaticCanvas("canvas");
 
-  if (layout.includes("row")) {
-    canvas.width = iconSize + text.width + gapH;
-    canvas.height = iconSize;
+  if (layout === "left" || layout === "right") {
+    // Use gap for horizontal layouts
+    canvas.width = iconSize + text.width + gap;
+    canvas.height = Math.max(iconSize, text.height); // Adjust height based on taller element
     canvas.centerObjectV(icon);
     canvas.centerObjectV(text);
   } else {
-    canvas.width = text.width;
-    canvas.height = iconSize + text.height + gapV;
+    // Use gap for vertical layouts
+    canvas.width = Math.max(iconSize, text.width); // Adjust width based on wider element
+    canvas.height = iconSize + text.height + gap;
     canvas.centerObjectH(icon);
     canvas.centerObjectH(text);
   }
 
   if (layout === layoutItems.top) {
-    text.top = iconSize + gapV;
+    icon.top = 0;
+    text.top = iconSize + gap;
   }
 
   if (layout === layoutItems.right) {
-    icon.left = text.width + gapH;
+    text.left = 0;
+    icon.left = text.width + gap;
   }
 
   if (layout === layoutItems.bottom) {
-    icon.top = text.height + gapV;
+    text.top = 0;
+    icon.top = text.height + gap;
   }
 
   if (layout === layoutItems.left) {
-    text.left = iconSize + gapH;
+    icon.left = 0;
+    text.left = iconSize + gap;
   }
 
   const group = new Group([text, icon]);
+
+  // Center the group on the canvas
+  canvas.centerObject(group);
 
   canvas.add(group);
   canvas.renderAll();
@@ -64,24 +71,38 @@ export async function createCanvasLogo({
 async function buildIcon(svgIcon: string, iconSize: number) {
   const { objects }: any = await loadSVGFromString(svgIcon);
   const icon = util.groupSVGElements(objects);
+
+  // Scale icon to fit iconSize while maintaining aspect ratio
+  const scale = iconSize / Math.max(icon.width ?? 1, icon.height ?? 1);
+  icon.scaleX = scale;
+  icon.scaleY = scale;
+
+  // Create a bounding box for positioning
   const box = new Rect({
     width: iconSize,
     height: iconSize,
     fill: "transparent",
   });
 
-  return new Group([box, icon]);
+  // Center the scaled icon within the bounding box
+  icon.left = (box.width! - icon.getScaledWidth()) / 2;
+  icon.top = (box.height! - icon.getScaledHeight()) / 2;
+
+  return new Group([box, icon], { width: iconSize, height: iconSize });
 }
 
-function buildText({ name, color, styles }: Customization) {
+function buildText({ name, color, styles, fontSize }: Customization) {
   const text = new FabricText(name as string, {
     fontFamily: styles?.fontFamily,
     fontWeight: styles?.fontWeight,
-    fontSize: styles?.fontSize as number,
+    fontSize: fontSize as number, // Use fontSize from customization
     lineHeight: 1,
     fill: color,
+    originX: "left",
+    originY: "top",
   });
 
+  // Remove margin hack, rely on group positioning
   const marginTopHack = -(Math.abs(styles?.marginTop as number) / 1.5) || 0;
   text.top = marginTopHack;
 
@@ -91,5 +112,9 @@ function buildText({ name, color, styles }: Customization) {
     fill: "transparent",
   });
 
-  return new Group([box, text]);
+  // Position text at top-left within its group
+  text.left = 0;
+  text.top = 0;
+
+  return new Group([box, text], { width: text.width, height: text.height });
 }

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "@/configs/FirebaseConfig";
+import defaultCredits from "@/app/_data/defaultCredits";
 export async function POST(req: NextRequest): Promise<NextResponse> {
   const { userEmail, userName } = await req.json();
   try {
@@ -14,7 +15,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       const data = {
         name: userName,
         email: userEmail,
-        credits: 5,
+        credits: defaultCredits.defaultCredits,
       };
       await setDoc(doc(db, "users", userEmail), { ...data });
       return NextResponse.json(data);

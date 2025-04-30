@@ -4,7 +4,8 @@ import Image from "next/image";
 import React from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { UserButton, useUser } from "@clerk/nextjs";
+import { SignIn, SignUpButton, UserButton, useUser } from "@clerk/nextjs";
+import { SignInButton } from "@clerk/nextjs";
 
 function Header() {
   const { user } = useUser();
@@ -30,9 +31,20 @@ function Header() {
             </Button>
           </Link>
         ) : (
-          <Button asChild>
-            <Link href="/create">Get Started</Link>
-          </Button>
+          <>
+            <Button asChild>
+              <Link href="/create">Get Started</Link>
+            </Button>
+            <SignUpButton
+              forceRedirectUrl="/"
+              signInForceRedirectUrl="/dashboard"
+              fallbackRedirectUrl="/"
+            >
+              <Button className="cursor-pointer" variant={"outline"}>
+                Sign Up
+              </Button>
+            </SignUpButton>
+          </>
         )}
 
         <UserButton />

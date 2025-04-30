@@ -64,8 +64,7 @@ function CreateLogo() {
       .replace("{logoDesign}", formData?.design?.title ?? "")
       .replace("{logoPrompt}", formData?.design?.prompt ?? "")
       .replace("{logoIdea}", formData?.idea ?? "")
-      .replace("{logoSimplicity}", formData?.simplicity?.prompt ?? "")
-
+      // .replace("{logoSimplicity}", formData?.simplicity?.prompt ?? "")
       .replace("{logoTone}", formData?.logoTone?.title || "");
 
     console.log("PROMPT", PROMPT);
@@ -169,16 +168,6 @@ function CreateLogo() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[60vh] gap-6">
-      <div className="w-60 flex justify-center mb-4">
-        <Link href="/dashboard">
-          <Button
-            variant="outline"
-            className="rounded-md shadow-sm cursor-pointer"
-          >
-            <LayoutDashboard className="cursor-" />
-          </Button>
-        </Link>
-      </div>
       {loading ? (
         <div className="flex flex-col items-center justify-center gap-2">
           <Loader2 className="animate-spin text-primary w-12 h-12 mb-2" />

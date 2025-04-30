@@ -11,23 +11,10 @@ export const Footer: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
           className
         )}
       >
-        <span>{new Date().getFullYear()} © dummylogo by</span>
-        <a
-          href="https://moiseshp.dev"
-          target="_blank"
-          className="font-semibold"
-        >
-          moiseshp.
-        </a>
-        <span>The source code is available on</span>
-        <a
-          href="https://github.com/moiseshp/dummylogo"
-          target="_blank"
-          title="Go to github project"
-          className="font-semibold"
-        >
-          GitHub.
-        </a>
+        <span>
+          {" "}
+          © {new Date().getFullYear()} All rights reserved by Logoflowy
+        </span>
       </div>
     </footer>
   );

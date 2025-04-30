@@ -45,19 +45,18 @@ function LogoDetailPage() {
 
         if (docSnap.exists()) {
           const fetchedData = docSnap.data() as FetchedLogoData;
-
+          console.log("Fetched data:", fetchedData);
           // Use the structure from logos.json[0] as a base
           const baseLogo = { ...allLogos[0] };
-
           // Create the single Logo object for LogoListGroup
           const preparedLogo: Logo = {
             ...baseLogo, // Spread base properties (styles, iconName etc.)
             id: logoId, // Use the actual logoId
             imageUrl: fetchedData.image, // Use fetched image URL
-            // We might not have SVG content from this Firestore fetch
             svgContent: undefined,
-            // Add description if needed by LogoItem/Logotype, or handle separately
+            companyName: fetchedData.title, // Use fetched title
           };
+          console.log("Prepared logo:", preparedLogo);
           setLogoItem(preparedLogo);
         } else {
           setError("Logo not found.");
@@ -107,18 +106,21 @@ function LogoDetailPage() {
 
   // Render Navbar and LogoListGroup with the single prepared logo item
   return (
-    <div>
-      {googleFontUrl && <link rel="stylesheet" href={googleFontUrl} />}
-      <Navbar />
-      {/* Wrap LogoListGroup in a centering container */}
-      <div className="flex justify-center items-start pt-10">
-        {/* Pass the single logo item in an array */}
-        <LogoListGroup
-          items={[logoItem]}
-          companyName={logoItem.customization?.name || "dummylogo"}
-        />
+    console.log("logoItem", logoItem),
+    (
+      <div>
+        {googleFontUrl && <link rel="stylesheet" href={googleFontUrl} />}
+        <Navbar />
+        {/* Wrap LogoListGroup in a centering container */}
+        <div className="flex justify-center items-start pt-10">
+          {/* Pass the single logo item in an array */}
+          <LogoListGroup
+            items={[logoItem]}
+            companyName={logoItem.companyName || "dummylogo"}
+          />
+        </div>
       </div>
-    </div>
+    )
   );
 }
 

@@ -5,6 +5,7 @@ import Lookup from "@/app/_data/Lookup";
 import Image from "next/image";
 import { SignInButton, useUser } from "@clerk/nextjs";
 import Link from "next/link";
+import { BadgeIcon } from "lucide-react";
 
 function PricingModel({
   onHandleInputChange,

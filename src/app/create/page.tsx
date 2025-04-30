@@ -8,7 +8,6 @@ import LogoColorPalette from "./_components/LogoColorPalette";
 import LogoDesigns from "./_components/LogoDesigns";
 import LogoIdea from "./_components/LogoIdea";
 import PricingModel from "./_components/PricingModel";
-import LogoSimplicity from "./_components/LogoSimplicity";
 import LogoTone from "./_components/LogoTone";
 
 export interface FormData {
@@ -17,8 +16,6 @@ export interface FormData {
   palette?: string;
   design?: { title: string; image: string; prompt: string };
   idea?: string;
-  simplicity?: { title: string; prompt: string };
-
   pricing?: string;
   logoTone?: { title: string; prompt: string };
 }
@@ -56,42 +53,35 @@ function Createlogo() {
               onHandleInputChange("desc", value)
             }
           />
-        ) : step === 3 ? (
+        ) : step === 6 ? (
           <LogoColorPalette
             formData={formData}
             onHandleInputChange={(value: string) =>
               onHandleInputChange("palette", value)
             }
           />
-        ) : step === 4 ? (
+        ) : step === 5 ? (
           <LogoDesigns
             formData={formData}
             onHandleInputChange={(value: any) =>
               onHandleInputChange("design", value)
             }
           />
-        ) : step === 5 ? (
-          <LogoSimplicity
-            formData={formData}
-            onHandleInputChange={(value: string) =>
-              onHandleInputChange("simplicity", value)
-            }
-          />
-        ) : step === 6 ? (
+        ) : step === 3 ? (
           <LogoTone
             formData={formData}
             onHandleInputChange={(value: string) =>
               onHandleInputChange("logoTone", value)
             }
           />
-        ) : step === 7 ? (
+        ) : step === 4 ? (
           <LogoIdea
             formData={formData}
             onHandleInputChange={(value: string) =>
               onHandleInputChange("idea", value)
             }
           />
-        ) : step === 8 ? (
+        ) : step === 7 ? (
           <PricingModel
             formData={formData}
             onHandleInputChange={(value: string) =>

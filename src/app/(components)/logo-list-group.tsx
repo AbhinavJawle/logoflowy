@@ -49,7 +49,13 @@ const resizeSvg = (svgContent: string, size: number): string => {
   return `<svg width="${size}px" height="${size}px" viewBox="0 0 24 24"><rect width="100%" height="100%" fill="currentColor"/></svg>`; // Return fallback if parsing failed
 };
 
-export const LogoListGroup = ({ items, companyName }: { items: Logo[], companyName?: string }) => {
+export const LogoListGroup = ({
+  items,
+  companyName,
+}: {
+  items: Logo[];
+  companyName?: string;
+}) => {
   const { initCustomization, buildCustomization, downloadLogo } =
     useLogoUtilities();
 
@@ -78,19 +84,17 @@ export const LogoListGroup = ({ items, companyName }: { items: Logo[], companyNa
     } else {
       // Fall back to Phosphor icon if no SVG content
       svgIcon = renderToString(
-        <Icon
-          color={customization.color}
-          size={customization.iconSize}
-        />
+        <Icon color={customization.color} size={customization.iconSize} />
       );
     }
     await downloadLogo(customization, svgIcon, filename);
   };
 
   // Determine container classes based on item count
-  const containerClasses = items.length === 1 
-    ? "-mt-[1px]" // No grid for single item, just margin if needed
-    : "grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5 -mt-[1px]"; // Grid for multiple items
+  const containerClasses =
+    items.length === 1
+      ? "-mt-[1px]" // No grid for single item, just margin if needed
+      : "grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5 -mt-[1px]"; // Grid for multiple items
 
   return (
     <div className={containerClasses}>
@@ -116,7 +120,11 @@ export const LogoListGroup = ({ items, companyName }: { items: Logo[], companyNa
             <LogotypeBox bgColor={customization.bgColor}>
               {item.imageUrl ? (
                 <div className="flex items-center justify-center h-full w-full">
-                  <div className={`flex items-center gap-y-0 ${layoutItems[customization.layout]}`}>
+                  <div
+                    className={`flex items-center gap-y-0 ${
+                      layoutItems[customization.layout]
+                    }`}
+                  >
                     <div
                       className="relative"
                       style={{
@@ -144,6 +152,7 @@ export const LogoListGroup = ({ items, companyName }: { items: Logo[], companyNa
                       className="mt-0"
                       style={{
                         ...customization.styles,
+                        fontSize: `${customization.fontSize}px`, // Apply dynamic font size
                         color: customization.color,
                         marginTop: "-10px",
                         paddingTop: "0",

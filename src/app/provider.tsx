@@ -5,7 +5,7 @@ import Header from "./_components/Header";
 import axios from "axios";
 import { useUser } from "@clerk/nextjs";
 import { UserDetailContext } from "@/app/_context/UserDetailContext";
-//Cliend-side file
+import { Footer } from "./_components/Footer";
 
 function Provider({ children }: { children: React.ReactNode }) {
   const { user } = useUser();
@@ -30,6 +30,7 @@ function Provider({ children }: { children: React.ReactNode }) {
         <main className="flex-grow container mx-auto px-0 md:px-0 py-1 md:py-1">
           {children}
         </main>
+        <Footer />
       </div>
     </UserDetailContext.Provider>
   );

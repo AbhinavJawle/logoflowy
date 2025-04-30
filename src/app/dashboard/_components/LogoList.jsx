@@ -19,16 +19,20 @@ function LogoList() {
     if (userDetail?.email) {
       const q = collection(db, "users", userDetail.email, "logos");
 
-      unsubscribe = onSnapshot(q, (querySnapshot) => {
-        const logos = [];
-        querySnapshot.forEach((doc) => {
-          logos.push({ id: doc.id, ...doc.data() });
-        });
-        setLogoList(logos);
-      }, (error) => {
-        console.error("Error listening to logo updates:", error);
-        setLogoList([]);
-      });
+      unsubscribe = onSnapshot(
+        q,
+        (querySnapshot) => {
+          const logos = [];
+          querySnapshot.forEach((doc) => {
+            logos.push({ id: doc.id, ...doc.data() });
+          });
+          setLogoList(logos);
+        },
+        (error) => {
+          console.error("Error listening to logo updates:", error);
+          setLogoList([]);
+        }
+      );
     }
 
     return () => unsubscribe();
@@ -62,7 +66,7 @@ function LogoList() {
       <h1 className="text-3xl font-bold mb-8 text-gray-800 text-center">
         Your Logos
       </h1>
-      <div className="w-full max-w-4xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-auto">
+      <div className="w-full max-w-4xl grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 mx-auto">
         {logoList?.length > 0
           ? logoList.map((logo) => (
               <Link key={logo.id} href={`/logo-detail/${logo.id}`} passHref>
@@ -93,11 +97,12 @@ function LogoList() {
                 className="bg-slate-200 animate-pulse rounded-xl w-full h-[300px]"
               ></div>
             ))}
-
         {logoList?.length === 0 && (
-          <h2 className="text-base font-medium text-gray-700">
-            No Logos Found
-          </h2>
+          <div className="flex flex-col items-center justify-center gap-2">
+            <h2 className="text-base font-medium text-gray-700">
+              No Logos Found
+            </h2>{" "}
+          </div>
         )}
       </div>
       {/* Modal Implementation */}
