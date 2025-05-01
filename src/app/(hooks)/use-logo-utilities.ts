@@ -49,13 +49,13 @@ export function useLogoUtilities() {
     // Pass customization to getCanvasData for font embedding
     const data = await getCanvasData(canvas, format, customization);
     //my attempt
-    // const svgContent = canvas.toSVG();
+    const svgContent = canvas.toSVG();
 
     if (format === "png") {
       downloadImage(data, filename);
     } else {
-      downloadSvg(data, filename);
-      // downloadSvg(svgContent, filename);
+      // downloadSvg(data, filename);
+      downloadSvg(svgContent, filename);
     }
   };
 
