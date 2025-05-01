@@ -8,8 +8,8 @@ export default {
       title: "Free",
       icon: "/free.svg", // Add your free plan icon here
       features: [
-        "🟣 Generate 15 logos for free",
-        "🟣 15 Credits (1 Credit = 1 Logo)",
+        "🟣 Generate 10 logos for free",
+        "🟣 10 Credits (1 Credit = 1 Logo)",
         "🟣 No Credit Card Required",
         "🟣 Sign Up required (to save your generated logos)",
         "🟣 Estimated time: 10 seconds",
