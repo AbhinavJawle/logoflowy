@@ -23,7 +23,14 @@ export async function POST(req: NextRequest) {
         { status: 500 }
       );
     }
-    const AiPrompt = JSON.parse(AiPromptResult.text);
+    let AiPrompt = AiPromptResult.text;
+    try {
+      // Try to parse as JSON if it's a JSON string
+      AiPrompt = JSON.parse(AiPromptResult.text);
+    } catch (parseError) {
+      // If not JSON, keep the raw text
+      console.log("AI response is not JSON, using raw text:", AiPromptResult.text);
+    }
 
     const input = {
       prompt: AiPromptResult.text,
