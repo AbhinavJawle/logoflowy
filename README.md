@@ -2,6 +2,6 @@ Built using Nextjs, Tailwindcss, Clerk, Zustand, Firebase and Radix UI. Replicat
 
 To do:
 
-Replace Cloudinary with Recraft for both Vectorization and BG removal
-Add option to generate typographic logos without logo icons
-Implement a full fledged canvas editor
+1. Replace Cloudinary with Recraft for both Vectorization and BG removal
+2. Add option to generate typographic logos without logo icons
+3. Implement a full fledged canvas editor
