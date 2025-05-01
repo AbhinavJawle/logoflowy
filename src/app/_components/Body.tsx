@@ -127,11 +127,7 @@ export default function Body() {
             </div>
           </div>
           <div className="mt-12 text-center">
-            <Button
-              asChild
-              size="lg"
-              className="px-8 py-6 text-lg text-purple-500"
-            >
+            <Button asChild size="lg" className="px-8 py-6 text-lg">
               <Link href="/create">Start Creating Your Logo</Link>
             </Button>
           </div>
@@ -353,6 +349,7 @@ export default function Body() {
             asChild
             size="lg"
             className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-6 text-lg"
+            variant="outline"
           >
             <Link href="/create">Start Creating For Free</Link>
           </Button>
